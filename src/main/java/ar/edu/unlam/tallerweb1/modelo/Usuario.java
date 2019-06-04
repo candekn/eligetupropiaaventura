@@ -1,9 +1,17 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+
 
 // Clase que modela el concepto de Usuario, la anotacion @Entity le avisa a hibernate que esta clase es persistible
 // el paquete ar.edu.unlam.tallerweb1.modelo esta indicado en el archivo hibernateCOntext.xml para que hibernate
@@ -20,6 +28,9 @@ public class Usuario {
 	private String email;
 	private String password;
 	private String rol;
+	@OneToOne
+	@Cascade (value=CascadeType.ALL)
+	private Jugador jugador;
 	
 	public Long getId() {
 		return id;
@@ -47,4 +58,11 @@ public class Usuario {
 	public void setRol(String rol) {
 		this.rol = rol;
 	}
+	public Jugador getJugador() {
+		return jugador;
+	}
+	public void setJugador(Jugador jugador) {
+		this.jugador = jugador;
+	}
+	
 }

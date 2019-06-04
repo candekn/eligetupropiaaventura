@@ -20,4 +20,24 @@ public class Respuesta {
 	private String opciones;
 	 @ManyToMany(mappedBy = "jugadores")
 	    private List<Jugador> jugadores = new ArrayList<>();
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getOpciones() {
+		return opciones;
+	}
+	public void setOpciones(String opciones) {
+		this.opciones = opciones;
+	}
+	public List<Jugador> getJugadores() {
+		return jugadores;
+	}
+	public void setJugadores(List<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
+	 
+	 
 }
