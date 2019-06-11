@@ -58,9 +58,46 @@ public class ControladorJuego {
 		
 		//Consulto id que contiene la ruta asociada
 		Long idRut = objRespuesta.getRuta().getId();
+				String opcion1 = objRespuesta.getRuta().getOpcion1();
+		String opcion2 = objRespuesta.getRuta().getOpcion2();
 		
+		//Muestro el texto que tiene la ruta consultado por su id
+		Ruta TextoHistoria=servicioJuego.mostrarRuta(idRut);
+		modelo.put("TextoHistoria",TextoHistoria.getTexto());
+		
+		//Trae los valores que le vamos a sumar a las estadisticas del jugador segun su respuesta
+		Integer rendimiento=objRespuesta.getRendimiento();
+		Integer social=objRespuesta.getSocial();
+		Integer dinero=objRespuesta.getDinero();
+		Integer estres=objRespuesta.getEstres();
+		
+		//Trae estadisticas que ya tenia el jugador
+		Jugador objJugador= servicioJuego.estadisticasJugador(mij);
+		
+		//Suma lo que tenia, mas, el valor de la respuesta
+		Integer saldo= dinero + objJugador.getDinero();
+		Integer TotalRendimiento = rendimiento + objJugador.getRendimiento();
+		Integer TotalSocial= social + objJugador.getSocial();
+		Integer TotalEstres= estres + objJugador.getEstres();
+		
+
 		modelo.put("ruta", idRut);
+		modelo.put("opcion1", opcion1);
+		modelo.put("opcion2", opcion2);
+		modelo.put("dinero", saldo);
+		modelo.put("rendimiento", TotalRendimiento);
+		modelo.put("social", TotalSocial);
+		modelo.put("estres", TotalEstres);
 		
+		
+		//Metodo para guardar la partida
+		mij.setUltimaRespuesta(respuesta.getRespuesta());
+		mij.setDinero(saldo);
+		mij.setRendimiento(TotalRendimiento);
+		mij.setSocial(TotalSocial);
+		mij.setEstres(TotalEstres);
+
+		servicioJuego.guardarPartida(mij);
 		
 		return new ModelAndView("juego",modelo);	
 	}
