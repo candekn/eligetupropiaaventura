@@ -33,5 +33,21 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		return juegoDao.consultarCodigoRuta(rta);
 	}
 	
+	@Override
+	public Ruta mostrarRuta(Long codigoRut){
+		return juegoDao.mostrarRuta(codigoRut);
+	}
 	
+	
+	@Override
+	public void guardarPartida(Jugador mij)
+	{
+		juegoDao.guardarPartida(mij);
+	}
+
+	@Override
+	public Jugador estadisticasJugador(Jugador mij) {
+		
+		return juegoDao.estadisticasJugador(mij);
+	}
 }
