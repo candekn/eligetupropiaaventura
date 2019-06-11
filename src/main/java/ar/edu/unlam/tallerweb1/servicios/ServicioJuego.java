@@ -16,6 +16,12 @@ public interface ServicioJuego {
 	 void guardarJugador(Jugador jugador);
 	 
      Respuesta consultarCodigoRuta(String rta);
+	
+	Ruta mostrarRuta(Long codigoRut);
+	 
+	 void guardarPartida(Jugador mij);
+	 
+	 Jugador estadisticasJugador(Jugador mij);
 	 
 	 
 }
