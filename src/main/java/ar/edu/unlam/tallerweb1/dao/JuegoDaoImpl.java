@@ -44,5 +44,29 @@ public class JuegoDaoImpl implements JuegoDao {
 				.uniqueResult();
 	}
 	
+	@Override
+	public Ruta mostrarRuta(Long codigoRut){
+		final Session session = sessionFactory.getCurrentSession();	
+        return (Ruta) session.createCriteria(Ruta.class)
+				
+				.add(Restrictions.eq("id",codigoRut) )
+				.uniqueResult();
+	}
 	
+	@Override
+	public void guardarPartida(Jugador mij)
+	{
+		final Session session = sessionFactory.getCurrentSession();
+		session.update(mij);
+	}
+
+	@Override
+	public Jugador estadisticasJugador(Jugador mij) {
+		
+		final Session session = sessionFactory.getCurrentSession();	
+        return (Jugador) session.createCriteria(Jugador.class)
+				
+				.add(Restrictions.eq("id",mij.getId()) )
+				.uniqueResult();
+	}
 }
