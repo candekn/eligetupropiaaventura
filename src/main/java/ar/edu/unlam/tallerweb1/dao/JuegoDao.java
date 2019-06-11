@@ -13,4 +13,10 @@ public interface JuegoDao {
 	
 	public Respuesta consultarCodigoRuta(String rta);
 	
+	public Ruta mostrarRuta(Long codigoRut);
+	
+	void guardarPartida(Jugador mij);
+
+	Jugador estadisticasJugador(Jugador mij);
+	
 }
