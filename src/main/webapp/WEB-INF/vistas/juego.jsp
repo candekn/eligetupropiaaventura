@@ -8,18 +8,37 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Juego</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<h1 style="text-align:center">Elije tu propia aventura!!</h1>
 	
 	<hr>
 	<p> ruta: ${ruta} </p>
+	<p> opcion 1: ${opcion1} </p>
+	<p> opcion 2: ${opcion2} </p>
+	<p> dinero: ${dinero} </p>
+	<p> Rendimiento: ${rendimiento} </p>
+	<p> Social: ${social} </p>
+	<p> Estres: ${estres} </p>
 	
 	<p style="text-align:center">${TextoHistoria}</p>
-	<form:form modelAtribute="respuesta" action="mostrarRuta" method="Post">
-	<input type="submit" name="respuesta" path="respuesta" value="${opcion1}"></input>
+<form:form modelAtribute="respuesta" action="mostrarRuta" method="Post">
+	<c:set var = "op" value="${opcion1}" />
+	<c:set var = "var" value="no" />
+	
+	<c:choose>
+	
+	 <c:when test="${op==var}">
+	  <input type="submit" name="respuesta" path="respuesta" value="{opcion3}"></"></input> 
+	</c:when>
+	
+	<c:otherwise>
+ 	<input type="submit" name="respuesta" path="respuesta" value="${opcion1}"></input>
  	<input type="submit" name="respuesta" path="respuesta" value="${opcion2}"></input>
+	</c:otherwise>
+	
+	</c:choose>
 
 </form:form>	
 </body>
