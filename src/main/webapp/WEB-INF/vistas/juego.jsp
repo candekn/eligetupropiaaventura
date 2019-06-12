@@ -30,7 +30,7 @@
 	<c:choose>
 	
 	 <c:when test="${op==var}">
-	  <input type="submit" name="respuesta" path="respuesta" value="{opcion3}"></"></input> 
+	  <input type="submit" name="respuesta" path="respuesta" value="${opcion3}"></"></input> 
 	</c:when>
 	
 	<c:otherwise>
