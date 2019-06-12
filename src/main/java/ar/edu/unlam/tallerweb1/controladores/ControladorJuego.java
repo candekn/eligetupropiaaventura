@@ -58,8 +58,9 @@ public class ControladorJuego {
 		
 		//Consulto id que contiene la ruta asociada
 		Long idRut = objRespuesta.getRuta().getId();
-				String opcion1 = objRespuesta.getRuta().getOpcion1();
+		String opcion1 = objRespuesta.getRuta().getOpcion1();
 		String opcion2 = objRespuesta.getRuta().getOpcion2();
+		String opcion3 = objRespuesta.getRuta().getOpcion3();
 		
 		//Muestro el texto que tiene la ruta consultado por su id
 		Ruta TextoHistoria=servicioJuego.mostrarRuta(idRut);
@@ -84,6 +85,7 @@ public class ControladorJuego {
 		modelo.put("ruta", idRut);
 		modelo.put("opcion1", opcion1);
 		modelo.put("opcion2", opcion2);
+		modelo.put("opcion3", opcion3);
 		modelo.put("dinero", saldo);
 		modelo.put("rendimiento", TotalRendimiento);
 		modelo.put("social", TotalSocial);
