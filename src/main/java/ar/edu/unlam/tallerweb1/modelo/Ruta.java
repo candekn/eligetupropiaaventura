@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.modelo;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -20,23 +21,22 @@ public class Ruta {
 	
 	
 	@OneToMany
-	@Cascade (value= CascadeType.ALL)
-	private ArrayList<Opcion> opciones;
+	private List<Opcion> opciones;
 	@OneToMany
-	private ArrayList<Respuesta> respuestas;
+	private List<Respuesta> respuestas;
 	
 	
 	
-	public ArrayList<Respuesta> getRespuestas() {
+	public List<Respuesta> getRespuestas() {
 		return respuestas;
 	}
-	public void setRespuestas(ArrayList<Respuesta> respuestas) {
+	public void setRespuestas(List<Respuesta> respuestas) {
 		this.respuestas = respuestas;
 	}
-	public ArrayList<Opcion> getOpciones() {
+	public List<Opcion> getOpciones() {
 		return opciones;
 	}
-	public void setOpciones(ArrayList<Opcion> opciones) {
+	public void setOpciones(List<Opcion> opciones) {
 		this.opciones = opciones;
 	}
 	public Long getId() {
