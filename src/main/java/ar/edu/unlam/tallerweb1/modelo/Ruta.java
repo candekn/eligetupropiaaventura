@@ -16,6 +16,9 @@ public class Ruta {
 	private String texto;
 	private String opcion1;
 	private String opcion2;
+	private String opcion3;
+	
+	
 	@OneToMany
 	@Cascade (value= CascadeType.ALL)
 	private ArrayList<Opcion> opciones;
@@ -59,6 +62,12 @@ public class Ruta {
 	}
 	public void setOpcion2(String opcion2) {
 		this.opcion2 = opcion2;
+	}
+	public String getOpcion3() {
+		return opcion3;
+	}
+	public void setOpcion3(String opcion3) {
+		this.opcion3 = opcion3;
 	}
 	
 }
