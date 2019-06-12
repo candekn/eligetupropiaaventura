@@ -14,6 +14,8 @@ public class Ruta {
 	@GeneratedValue (strategy= GenerationType.IDENTITY)
 	private Long id;
 	private String texto;
+	private String opcion1;
+	private String opcion2;
 	@OneToMany
 	@Cascade (value= CascadeType.ALL)
 	private ArrayList<Opcion> opciones;
@@ -45,6 +47,18 @@ public class Ruta {
 	}
 	public void setTexto(String texto) {
 		this.texto = texto;
+	}
+	public String getOpcion1() {
+		return opcion1;
+	}
+	public void setOpcion1(String opcion1) {
+		this.opcion1 = opcion1;
+	}
+	public String getOpcion2() {
+		return opcion2;
+	}
+	public void setOpcion2(String opcion2) {
+		this.opcion2 = opcion2;
 	}
 	
 }
