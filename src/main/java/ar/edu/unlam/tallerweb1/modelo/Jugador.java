@@ -1,10 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

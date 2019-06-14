@@ -11,9 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 import ar.edu.unlam.tallerweb1.dao.JuegoDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
-import ar.edu.unlam.tallerweb1.modelo.Opcion;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
-import ar.edu.unlam.tallerweb1.modelo.Ruta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Service("ServicioJuego")
@@ -28,16 +27,6 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		juegoDao.guardarJugador(jugador);
 	}
 	
-	@Override
-	public Respuesta consultarCodigoRuta(String rta){
-		return juegoDao.consultarCodigoRuta(rta);
-	}
-	
-	@Override
-	public Ruta mostrarRuta(Long codigoRut){
-		return juegoDao.mostrarRuta(codigoRut);
-	}
-	
 	
 	@Override
 	public void guardarPartida(Jugador mij)
@@ -49,5 +38,18 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	public Jugador estadisticasJugador(Jugador mij) {
 		
 		return juegoDao.estadisticasJugador(mij);
+	}
+
+	@Override
+	public Pregunta buscarPregunta(Respuesta rta) {
+		
+		return juegoDao.buscarPregunta(rta) ;
+	}
+
+
+	@Override
+	public List<Respuesta> buscarRespuestas(Pregunta siguientePregunta) {
+		
+		return juegoDao.buscarRespuestas(siguientePregunta);
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Order;
@@ -17,9 +18,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
-import ar.edu.unlam.tallerweb1.modelo.Opcion;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
-import ar.edu.unlam.tallerweb1.modelo.Ruta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 @Repository("JuegoDao")
@@ -35,23 +35,6 @@ public class JuegoDaoImpl implements JuegoDao {
 		session.save(jugador);
 	}
 	
-	@Override
-	public Respuesta consultarCodigoRuta(String rta){
-		final Session session = sessionFactory.getCurrentSession();	
-        return (Respuesta) session.createCriteria(Respuesta.class)
-				
-				.add(Restrictions.eq("respuesta",rta) )
-				.uniqueResult();
-	}
-	
-	@Override
-	public Ruta mostrarRuta(Long codigoRut){
-		final Session session = sessionFactory.getCurrentSession();	
-        return (Ruta) session.createCriteria(Ruta.class)
-				
-				.add(Restrictions.eq("id",codigoRut) )
-				.uniqueResult();
-	}
 	
 	@Override
 	public void guardarPartida(Jugador mij)
@@ -68,5 +51,26 @@ public class JuegoDaoImpl implements JuegoDao {
 				
 				.add(Restrictions.eq("id",mij.getId()) )
 				.uniqueResult();
+	}
+
+	@Override
+	public Pregunta buscarPregunta(Respuesta rta) {
+		final Session session = sessionFactory.getCurrentSession();	
+		
+		Long id = rta.getId();
+		Respuesta r = (Respuesta) session.createCriteria(Respuesta.class)
+				.add(Restrictions.eq("id", id)).uniqueResult();
+		
+		return r.getPreguntaSiguiente();
+	}
+
+	@Override
+	public List<Respuesta> buscarRespuestas(Pregunta siguientePregunta) {
+		final Session session = sessionFactory.getCurrentSession();	
+		
+		List<Respuesta> respuestas = session.createCriteria(Respuesta.class)
+									.add(Restrictions.eq("pregunta", siguientePregunta))
+									.list();
+		return respuestas;
 	}
 }

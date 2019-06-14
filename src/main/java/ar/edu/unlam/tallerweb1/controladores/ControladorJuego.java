@@ -16,9 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
-import ar.edu.unlam.tallerweb1.modelo.Opcion;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
-import ar.edu.unlam.tallerweb1.modelo.Ruta;
+import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioJuego;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
@@ -36,14 +35,16 @@ public class ControladorJuego {
 			
 	{
 	 	//Guardar Jugador
-		
-		mij.setDinero(2);
-		mij.setEstres(0);
+		ModelMap modelo = new ModelMap();
+		mij.setDinero(100);
+		mij.setEstres(30);
 		mij.setPuntaje(0);
-		mij.setRendimiento(0);
-		mij.setSocial(0);
+		mij.setRendimiento(50);
+		mij.setSocial(30);
+		Respuesta respuesta = new Respuesta();
 		servicioJuego.guardarJugador(mij);
-		return new ModelAndView("inicio");
+		modelo.put("respuesta", respuesta);
+		return new ModelAndView("inicio",modelo);
 	}
 	
 	
@@ -53,54 +54,25 @@ public class ControladorJuego {
 	{
 		ModelMap modelo = new ModelMap();
 	
-		//Recibo el objeto respuesta que tenga la ruta asociada a la respuesta elegida por el jugador
-		Respuesta objRespuesta=servicioJuego.consultarCodigoRuta(respuesta.getRespuesta());
-		
-		//Consulto id que contiene la ruta asociada
-		Long idRut = objRespuesta.getRuta().getId();
-		String opcion1 = objRespuesta.getRuta().getOpcion1();
-		String opcion2 = objRespuesta.getRuta().getOpcion2();
-		String opcion3 = objRespuesta.getRuta().getOpcion3();
-		
-		//Muestro el texto que tiene la ruta consultado por su id
-		Ruta TextoHistoria=servicioJuego.mostrarRuta(idRut);
-		modelo.put("TextoHistoria",TextoHistoria.getTexto());
-		
-		//Trae los valores que le vamos a sumar a las estadisticas del jugador segun su respuesta
-		Integer rendimiento=objRespuesta.getRendimiento();
-		Integer social=objRespuesta.getSocial();
-		Integer dinero=objRespuesta.getDinero();
-		Integer estres=objRespuesta.getEstres();
-		
-		//Trae estadisticas que ya tenia el jugador
-		Jugador objJugador= servicioJuego.estadisticasJugador(mij);
-		
-		//Suma lo que tenia, mas, el valor de la respuesta
-		Integer saldo= dinero + objJugador.getDinero();
-		Integer TotalRendimiento = rendimiento + objJugador.getRendimiento();
-		Integer TotalSocial= social + objJugador.getSocial();
-		Integer TotalEstres= estres + objJugador.getEstres();
-		
+		//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
+		Pregunta siguientePregunta = servicioJuego.buscarPregunta(respuesta) ;
 
-		modelo.put("ruta", idRut);
-		modelo.put("opcion1", opcion1);
-		modelo.put("opcion2", opcion2);
-		modelo.put("opcion3", opcion3);
-		modelo.put("dinero", saldo);
-		modelo.put("rendimiento", TotalRendimiento);
-		modelo.put("social", TotalSocial);
-		modelo.put("estres", TotalEstres);
+		//Recibo una lista de respuestas
+		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
 		
-		
+		//Paso la lista de opciones a la vista
+		modelo.put("listaR", miRespuesta);
+		modelo.put("pregunta", siguientePregunta);
+
 		//Metodo para guardar la partida
-		mij.setUltimaRespuesta(respuesta.getRespuesta());
-		mij.setDinero(saldo);
-		mij.setRendimiento(TotalRendimiento);
-		mij.setSocial(TotalSocial);
-		mij.setEstres(TotalEstres);
-
-		servicioJuego.guardarPartida(mij);
-		
+//		mij.setUltimaRespuesta(respuesta.getRespuesta());
+//		mij.setDinero(saldo);
+//		mij.setRendimiento(TotalRendimiento);
+//		mij.setSocial(TotalSocial);
+//		mij.setEstres(TotalEstres);
+//
+//		servicioJuego.guardarPartida(mij);
+//		
 		return new ModelAndView("juego",modelo);	
 	}
 	
