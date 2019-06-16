@@ -18,7 +18,7 @@
 	<h2>Presentacion del juego</h2>
 	<h2>Iniciar sesion/Registrarse</h2>
 	<form:form modelAttribute="respuesta" action="mostrarRuta" method="Post">
-	<form:input path="id" value="101" style="display:none" />
+	<form:input path="id" value="100" style="display:none" />
 	<button type="submit">Jugar</button> 
 	
 
