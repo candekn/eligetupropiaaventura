@@ -20,10 +20,10 @@ Lo miro y respondo.
 Terminamos los dos riéndonos.");
 
 INSERT INTO respuesta(id, opcion, pregunta_id, preguntaSiguiente_id)
-VALUES(101,"Jugar",null,1),
-(102,"Humanidades",1,2),
-(1022,"Ingeniería",1,null),
-(103,"No preguntarle",2,3);
+VALUES(100,"Jugar",null,1),
+(101,"Humanidades",1,2),
+(1011,"Ingeniería",1,null),
+(102,"No preguntarle",2,3);
 
 SELECT * FROM RESPUESTA;
 SELECT * FROM PREGUNTA;
