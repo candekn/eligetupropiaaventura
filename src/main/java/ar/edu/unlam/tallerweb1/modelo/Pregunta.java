@@ -15,6 +15,7 @@ public class Pregunta {
 	@Column( name="textoDeLaPregunta", length=650)
 	private String textoDeLaPregunta;
 
+	private String imagen;
 	
 
 
@@ -29,6 +30,12 @@ public class Pregunta {
 	}
 	public void setTextoDeLaPregunta(String textoDeLaPregunta) {
 		this.textoDeLaPregunta = textoDeLaPregunta;
+	}
+	public String getImagen() {
+		return imagen;
+	}
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 	
 	

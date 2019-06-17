@@ -63,7 +63,7 @@ public class ControladorJuego {
 		//Paso la lista de opciones a la vista
 		modelo.put("listaR", miRespuesta);
 		modelo.put("pregunta", siguientePregunta);
-
+		modelo.put("respuesta", respuesta);
 		//Metodo para guardar la partida
 //		mij.setUltimaRespuesta(respuesta.getRespuesta());
 //		mij.setDinero(saldo);

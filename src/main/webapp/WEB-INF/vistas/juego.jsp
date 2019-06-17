@@ -17,7 +17,7 @@
   <link href="css/Estilos.css" rel="stylesheet">
 
 </head>
-<body background="img/Entrada.jpg">
+<body background="img/${pregunta.imagen}">
 
 <p>Rendimiento: ${respuesta.rendimiento} </p>
 <p>Social: ${respuesta.social} </p>
