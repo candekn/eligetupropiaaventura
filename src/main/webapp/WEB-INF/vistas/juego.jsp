@@ -18,13 +18,31 @@
 
 </head>
 <body background="img/Entrada.jpg">
-<h2 style="background-color:white">${pregunta.textoDeLaPregunta}</h2>
+
+<p>Rendimiento: ${respuesta.rendimiento} </p>
+<p>Social: ${respuesta.social} </p>
+<p>Estres: ${respuesta.estres} </p>
+<p>Dinero: ${respuesta.dinero} </p>
+
+<section id="hero">
+    <div class="hero-container">
+      <div class="wow fadeIn">
+
+
+<h2>${pregunta.textoDeLaPregunta}</h2>
+
+
 <form:form modelAttribute="respuesta" action="mostrarRuta" method="Post">
 	<c:forEach items="${listaR}" var="lR">
-	<form:button type="submit" name="id" path="id" id="id" value="${lR.id}" >${lR.opcion}</form:button>
+	 <div class="actions" >
+	<form:button type="submit" class="btn-services" name="id" path="id" id="id" value="${lR.id}" >${lR.opcion}</form:button>
+	</div>
 	</c:forEach> 
 </form:form>
 
+</div>
+    </div>
+  </section>
 
 </body>
 </html>

@@ -1,0 +1,179 @@
+
+
+
+a {
+  color: #03C4EB;
+  transition: 0.5s;
+}
+
+a:hover, a:active, a:focus {
+  color: #03c5ec;
+  outline: none;
+  text-decoration: none;
+}
+
+
+p {
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Raleway", sans-serif;
+  font-weight: 400;
+  margin: 0 0 20px 0;
+  padding: 0;
+}
+
+
+/* Prelaoder */
+#preloader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  display: none;
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  padding: 6px 12px 9px 12px;
+  font-size: 16px;
+  border-radius: 2px;
+  right: 15px;
+  bottom: 15px;
+  transition: background 0.5s;
+}
+
+
+/*--------------------------------------------------------------
+# Welcome
+--------------------------------------------------------------*/
+#hero {
+  display: table;
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    background-attachment: fixed;
+  }
+}
+
+#hero .hero-logo {
+  margin: 20px;
+}
+
+#hero .hero-logo img {
+  max-width: 100%;
+}
+
+#hero .hero-container {
+ /* background: rgba(0, 0, 0, 0.8);*/
+  display: table-cell;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+#hero h1 {
+  margin: 30px 0 10px 0;
+  font-weight: 700;
+  line-height: 48px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+}
+
+#hero h2 {
+  color: white;
+   background: rgba(0, 0, 0, 0.6);
+  margin-bottom: 50px;
+}
+
+}
+
+
+#hero .rotating > .animated {
+  display: inline-block;
+}
+
+#hero .actions form:button {
+border: 2px solid #fff; */
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    height: 28px;
+    transition: 1.6s;
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 5800;
+    font-size: 16px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    display: inline-block;
+    padding: 8px 20px;
+    width: 650px;
+    margin-bottom: 2px;
+    transition: 1.6s;
+    border-color: black;
+  
+}
+
+/********************************************************************/
+
+
+#hero .btn-get-started {
+  background:000;
+  /*border: 2px solid #03C4EB;*/
+  color: #fff;
+}
+
+#hero .btn-get-started:hover {
+  background: none;
+ /* border: 2px solid #fff;*/
+  color: #fff;
+}
+
+#hero .btn-services {
+  border: 2px solid #fff;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.6);
+    height: 28px;
+    transition: 1.6s;
+    font-family: "Raleway", sans-serif;
+    text-transform: uppercase;
+    font-weight: 5800;
+    font-size: 16px;
+    text-decoration: none;
+    background: rgba(0, 0, 0, 0.8);
+    letter-spacing: 3px;
+    display: inline-block;
+    padding: 8px 20px;
+    width: 650px;
+    margin-bottom: 2px;
+    transition: 1.6s;
+    border-color: black;
+}
+
+#hero .btn-services:hover {
+  background: #03C4EB;
+    color: #fff;
+ /* border: 2px solid #03C4EB;*/
+}
+
