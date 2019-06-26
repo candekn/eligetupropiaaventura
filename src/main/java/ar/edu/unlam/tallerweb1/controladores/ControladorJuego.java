@@ -54,26 +54,38 @@ public class ControladorJuego {
 	{
 		ModelMap modelo = new ModelMap();
 	
+		//Recibo los datos de la respuesta actual
+		Respuesta respuestaActual = servicioJuego.buscarRespuesta(respuesta); 
+		if(respuestaActual.getOpcion().equals("Inicio")){
+			return new ModelAndView("redirect:/inicio");
+			
+		
+		
+			Pregunta GameOver = servicioJuego.mostrarGameOver(id) ;
+
+			//Recibo una lista de las siguientes respuestas finales
+			List<Respuesta> opcionFinal = servicioJuego.buscarRespuestas(GameOver);
+			
+			
+			//Paso la lista de opciones a la vista
+			modelo.put("listaR", opcionFinal);
+			modelo.put("pregunta", GameOver);
+			//servicioJuego.reiniciarPartida( respuestaActual, objJugador);
+		
+		
+		
+		
+		
+		}else{
 		//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
 		Pregunta siguientePregunta = servicioJuego.buscarPregunta(respuesta) ;
 
-		//Recibo una lista de respuestas
+		//Recibo una lista de las siguientes respuestas
 		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
 		
-		//Paso la lista de opciones a la vista
-		modelo.put("listaR", miRespuesta);
-		modelo.put("pregunta", siguientePregunta);
-		modelo.put("respuesta", respuesta);
-		//Metodo para guardar la partida
-//		mij.setUltimaRespuesta(respuesta.getRespuesta());
-//		mij.setDinero(saldo);
-//		mij.setRendimiento(TotalRendimiento);
-//		mij.setSocial(TotalSocial);
-//		mij.setEstres(TotalEstres);
-//
-//		servicioJuego.guardarPartida(mij);
-//		
-		return new ModelAndView("juego",modelo);	
+			}
+		return new ModelAndView("juego",modelo);
+		
 	}
 	
 
