@@ -21,6 +21,8 @@ public interface ServicioJuego {
 	 Pregunta buscarPregunta(Respuesta rta);
 
 	List<Respuesta> buscarRespuestas(Pregunta siguientePregunta);
-	 
-	 
+	 Respuesta buscarRespuesta(Respuesta respuesta);
+	 Pregunta mostrarGameOver(Long id);
+
+	void reiniciarPartida(Respuesta respuestaActual, Jugador objJugador);
 }
