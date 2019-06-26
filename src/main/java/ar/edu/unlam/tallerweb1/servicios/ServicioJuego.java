@@ -12,17 +12,22 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 public interface ServicioJuego {
 	
 	
-	 void guardarJugador(Jugador jugador);
+	void guardarJugador(Jugador jugador);
 	 
 	 void guardarPartida(Jugador mij);
 	 
-	 Jugador estadisticasJugador(Jugador mij);
+	 Jugador estadisticasJugador();
 
 	 Pregunta buscarPregunta(Respuesta rta);
 
 	List<Respuesta> buscarRespuestas(Pregunta siguientePregunta);
-	 Respuesta buscarRespuesta(Respuesta respuesta);
-	 Pregunta mostrarGameOver(Long id);
+	
+	List<Jugador> buscarJugadores();
+
+	Respuesta buscarRespuesta(Respuesta respuesta);
+
+	Jugador calcularEstadisticas(Respuesta respuestaActual,Jugador objJugador);
+
+	Pregunta mostrarGameOver(Long id);
 
 	void reiniciarPartida(Respuesta respuestaActual, Jugador objJugador);
-}
