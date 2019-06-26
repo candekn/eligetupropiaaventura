@@ -73,4 +73,31 @@ public class JuegoDaoImpl implements JuegoDao {
 									.list();
 		return respuestas;
 	}
+		@Override
+	public Respuesta buscarRespuesta(Respuesta respuesta) {
+		final Session session = sessionFactory.getCurrentSession();
+		Long id = respuesta.getId();
+		 return (Respuesta) session.createCriteria(Respuesta.class)
+					.add(Restrictions.eq("id",id) )
+					.uniqueResult();
+	}
+
+
+	@Override
+	public Pregunta mostrarGameOver(Long id) {
+final Session session = sessionFactory.getCurrentSession();	
+		
+		Pregunta p = (Pregunta) session.createCriteria(Pregunta.class)
+				.add(Restrictions.eq("id", id)).uniqueResult();
+		
+		return p;
+		
+	}
+	
+	@Override
+	public void guardarPartida(Jugador mij)
+	{
+		final Session session = sessionFactory.getCurrentSession();
+		session.update(mij);
+	}
 }
