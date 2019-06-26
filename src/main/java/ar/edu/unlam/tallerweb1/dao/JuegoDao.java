@@ -18,4 +18,9 @@ public interface JuegoDao {
 
 	List<Respuesta> buscarRespuestas(Pregunta siguientePregunta);
 	
+		Respuesta buscarRespuesta(Respuesta respuesta);
+
+	Pregunta mostrarGameOver(Long id);
+	void guardarPartida(Jugador mij);
+	
 }
