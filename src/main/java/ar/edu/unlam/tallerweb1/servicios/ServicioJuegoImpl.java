@@ -52,4 +52,29 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		
 		return juegoDao.buscarRespuestas(siguientePregunta);
 	}
+	
+	
+	@Override
+	public Respuesta buscarRespuesta(Respuesta respuesta) {
+		return juegoDao.buscarRespuesta(respuesta);
+		
+	}
+	
+	@Override
+	public Pregunta mostrarGameOver(Long id) {
+		return	juegoDao.mostrarGameOver(id);
+		
+	}
+	
+	@Override
+	public void reiniciarPartida(Respuesta respuestaActual, Jugador objJugador) {
+		Long id=(long) 100;
+		objJugador.setUltimaRespuesta(id);
+
+		objJugador.setRendimiento(0);
+		objJugador.setDinero(0);
+		objJugador.setSocial(0);
+		objJugador.setEstres(0);
+	}
+	
 }
