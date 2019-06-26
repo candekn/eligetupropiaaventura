@@ -12,15 +12,16 @@ public interface JuegoDao {
 	
 	void guardarPartida(Jugador mij);
 
-	Jugador estadisticasJugador(Jugador mij);
+	Jugador estadisticasJugador();
 
 	Pregunta buscarPregunta(Respuesta rta);
 
 	List<Respuesta> buscarRespuestas(Pregunta siguientePregunta);
-	
-		Respuesta buscarRespuesta(Respuesta respuesta);
+
+	List<Jugador> buscarJugadores();
+
+	Respuesta buscarRespuesta(Respuesta respuesta);
 
 	Pregunta mostrarGameOver(Long id);
-	void guardarPartida(Jugador mij);
 	
 }
