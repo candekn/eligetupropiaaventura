@@ -36,11 +36,11 @@ public class ControladorJuego {
 	{
 	 	//Guardar Jugador
 		ModelMap modelo = new ModelMap();
-		mij.setDinero(100);
-		mij.setEstres(30);
+		mij.setDinero(0);
+		mij.setEstres(0);
 		mij.setPuntaje(0);
-		mij.setRendimiento(50);
-		mij.setSocial(30);
+		mij.setRendimiento(0);
+		mij.setSocial(0);
 		Respuesta respuesta = new Respuesta();
 		servicioJuego.guardarJugador(mij);
 		modelo.put("respuesta", respuesta);
