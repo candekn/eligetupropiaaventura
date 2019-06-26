@@ -26,7 +26,7 @@ public class Jugador {
 	private Integer social;
 	private Integer dinero;
 	private Integer puntaje;
-	private String ultimaRespuesta;
+	private Long ultimaRespuesta;
 	
 	@OneToOne
 	private Usuario usuario;
@@ -109,11 +109,11 @@ public class Jugador {
 		this.respuestas = respuestas;
 	}
 
-	public String getUltimaRespuesta() {
+	public Long getUltimaRespuesta() {
 		return ultimaRespuesta;
 	}
 
-	public void setUltimaRespuesta(String ultimaRespuesta) {
+	public void setUltimaRespuesta(Long ultimaRespuesta) {
 		this.ultimaRespuesta = ultimaRespuesta;
 	}
   	  
