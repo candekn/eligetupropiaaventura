@@ -44,15 +44,25 @@ public class JuegoDaoImpl implements JuegoDao {
 	}
 
 	@Override
-	public Jugador estadisticasJugador(Jugador mij) {
+	public Jugador estadisticasJugador() {
+		
 		
 		final Session session = sessionFactory.getCurrentSession();	
         return (Jugador) session.createCriteria(Jugador.class)
 				
-				.add(Restrictions.eq("id",mij.getId()) )
 				.uniqueResult();
 	}
 
+	
+	@Override
+	public List<Jugador> buscarJugadores() {
+		final Session session = sessionFactory.getCurrentSession();	
+		
+		List<Jugador> listJugador = session.createCriteria(Jugador.class)
+									.list();
+		return listJugador;
+	}
+	
 	@Override
 	public Pregunta buscarPregunta(Respuesta rta) {
 		final Session session = sessionFactory.getCurrentSession();	
@@ -73,7 +83,9 @@ public class JuegoDaoImpl implements JuegoDao {
 									.list();
 		return respuestas;
 	}
-		@Override
+
+
+	@Override
 	public Respuesta buscarRespuesta(Respuesta respuesta) {
 		final Session session = sessionFactory.getCurrentSession();
 		Long id = respuesta.getId();
@@ -93,11 +105,10 @@ final Session session = sessionFactory.getCurrentSession();
 		return p;
 		
 	}
-	
-	@Override
-	public void guardarPartida(Jugador mij)
-	{
-		final Session session = sessionFactory.getCurrentSession();
-		session.update(mij);
-	}
+
+
+
+
+
+
 }
