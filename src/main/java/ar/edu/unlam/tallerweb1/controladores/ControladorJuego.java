@@ -59,8 +59,35 @@ public class ControladorJuego {
 		if(respuestaActual.getOpcion().equals("Inicio")){
 			return new ModelAndView("redirect:/inicio");
 			
+		}else{
+		//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
+		Pregunta siguientePregunta = servicioJuego.buscarPregunta(respuesta) ;
+
+		//Recibo una lista de las siguientes respuestas
+		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
 		
+		//Recibo jugador
+		Jugador objJugador = servicioJuego.estadisticasJugador();
+	
 		
+		Jugador objJugadorConEstadisticas=servicioJuego.calcularEstadisticas(respuestaActual, objJugador);
+		
+		//Si supera el 100% de estres o de social pierde el juego
+		if((objJugadorConEstadisticas.getEstres()>=100) || (objJugadorConEstadisticas.getRendimiento()<20) || (objJugadorConEstadisticas.getRendimiento()<20 && objJugadorConEstadisticas.getSocial()>70)){
+			Long id=(long) 0;
+			if(objJugadorConEstadisticas.getEstres()>=100)
+					{ id=(long) 4;
+					}
+			else if(objJugadorConEstadisticas.getRendimiento()<20)
+					{
+						id=(long) 5;
+					}
+			
+			else if( (objJugadorConEstadisticas.getRendimiento()<20 && objJugadorConEstadisticas.getSocial()>70))
+					{
+						 id=(long) 6;
+					}
+			//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
 			Pregunta GameOver = servicioJuego.mostrarGameOver(id) ;
 
 			//Recibo una lista de las siguientes respuestas finales
@@ -71,19 +98,27 @@ public class ControladorJuego {
 			modelo.put("listaR", opcionFinal);
 			modelo.put("pregunta", GameOver);
 			//servicioJuego.reiniciarPartida( respuestaActual, objJugador);
-		
-		
-		
-		
-		
+			
 		}else{
-		//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
-		Pregunta siguientePregunta = servicioJuego.buscarPregunta(respuesta) ;
+			//Paso la lista de opciones a la vista
+			modelo.put("listaR", miRespuesta);
+			modelo.put("pregunta", siguientePregunta);
+			//Metodo para guardar la partida					
+			servicioJuego.guardarPartida(objJugadorConEstadisticas);
+			modelo.put("respuesta", respuesta);
 
-		//Recibo una lista de las siguientes respuestas
-		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
+		}
+		servicioJuego.guardarPartida(objJugadorConEstadisticas);
+	
+			//Paso a la vista los resultados
+				modelo.put("rendimiento", objJugadorConEstadisticas.getRendimiento());
+				modelo.put("estres", objJugadorConEstadisticas.getEstres());
+				modelo.put("social", objJugadorConEstadisticas.getSocial());
+				modelo.put("dinero", objJugadorConEstadisticas.getDinero());
 		
-			}
+					
+		
+		}
 		return new ModelAndView("juego",modelo);
 		
 	}
