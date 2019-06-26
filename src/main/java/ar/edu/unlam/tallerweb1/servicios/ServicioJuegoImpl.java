@@ -77,4 +77,36 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		objJugador.setEstres(0);
 	}
 	
+	/**/
+	@Override
+	public List<Jugador> buscarJugadores()
+	{
+		return juegoDao.buscarJugadores();
+	}
+	
+	@Override
+	public Jugador calcularEstadisticas(Respuesta respuestaActual, Jugador objJugador){
+		Integer rendimiento=0;
+		Integer estres=0;
+		Integer social=0;
+		Integer dinero=0;
+		
+		
+		//Suma lo que tenia, mas, el valor de la respuesta
+		 rendimiento= respuestaActual.getRendimiento()+objJugador.getRendimiento();
+		 estres= respuestaActual.getEstres()+objJugador.getEstres();
+		 social= respuestaActual.getSocial()+objJugador.getSocial();
+		 dinero= respuestaActual.getDinero()+objJugador.getDinero();
+ 
+		objJugador.setUltimaRespuesta(respuestaActual.getId());
+
+		objJugador.setRendimiento(rendimiento);
+		objJugador.setDinero(dinero);
+		objJugador.setSocial(social);
+		objJugador.setEstres(estres);
+
+		return objJugador;
+}
+
+	
 }
