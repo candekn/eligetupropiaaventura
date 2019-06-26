@@ -13,17 +13,67 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <meta content="" name="keywords">
   <meta content="" name="description">
+  
+  <!-- Estas evitan que la pagina deseada no se cargue en la cache y no pueda ser mostrada cuando se regresa atras. -->
+  <meta http-equiv="Expires" CONTENT="0">
+  <meta http-equiv="Cache-Control" CONTENT="no-cache">
+  <meta http-equiv="Pragma" CONTENT="no-cache">
 
   <link href="css/Estilos.css" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<script language="JavaScript">
+javascript:window.history.forward(0); //Esto es para cuando pulse al botón de Atrás
+//javascript:window.history.back(1); //Esto para cuando pulse al botón de Adelante
+</script>
 
 </head>
-<body background="img/${pregunta.imagen}">
+<body background="img/${pregunta.imagen}" onload="Javascript:history.go(2);">
 
-<p>Rendimiento: ${respuesta.rendimiento} </p>
-<p>Social: ${respuesta.social} </p>
-<p>Estres: ${respuesta.estres} </p>
-<p>Dinero: ${respuesta.dinero} </p>
 
+<script type="text/javascript">
+window.location.hash="no-back-button";
+window.location.hash="Again-No-back-button";//esta linea es necesaria para chrome
+window.onhashchange=function(){window.location.hash="no-back-button";}
+</script>
+	
+
+<div style="background: #d8d8d8;
+    width: 120px;
+    font-size: 29px;
+    border-radius: 21px;
+    border-style: ridge;display:block;float:left;margin-right:4px;"><img src="img/rendimiento.png" style="height:50px;width:50px;"><span style="text-align:center;font-size:30px;position: absolute;
+    margin-top: 13px;
+    margin-left: 7px;"><h4><b> ${rendimiento}</b></h4></span></div>&nbsp 
+
+	
+<div style="background: #d8d8d8;
+    width: 120px;
+    font-size: 29px;
+    border-radius: 21px;
+    border-style: ridge;display:block;float:left;margin-right:4px;">	<img src="img/estres.png" style="height:50px;width:50px;"><span style="text-align:center;font-size:30px;position: absolute;
+    margin-top: 13px;
+    margin-left: 7px;"><h4><b> ${estres}</b></h4></span></div>&nbsp 
+
+	
+<div style="background: #d8d8d8;
+    width: 120px;
+    font-size: 29px;
+    border-radius: 21px;
+    border-style: ridge;display:block;float:left;margin-right:4px;"><img src="img/social.png" style="height:50px;width:50px;"><span style="text-align:center;font-size:30px;position: absolute;
+    margin-top: 13px;
+    margin-left: 7px;"><h4><b>${social}</b></h4></span></div> &nbsp
+
+<div style="background: #d8d8d8;
+    width: 120px;
+    font-size: 29px;
+    border-radius: 21px;
+    border-style: ridge;display:block;float:left;margin-right:4px;">	<img src="img/dinero.png" style="height:50px;width:50px;"><span style="text-align:center;font-size:30px;position: absolute;
+    margin-top: 13px;
+    margin-left: 7px;"><h4><b>${dinero}</b></h4></span></div>
+
+	
+	
 <section id="hero">
     <div class="hero-container">
       <div class="wow fadeIn">
@@ -44,5 +94,12 @@
     </div>
   </section>
 
+	
+<script> 
+window.onbeforeunload = function () { 
+   // Deshabilitar volver. 
+} 
+</script>	
+	
 </body>
 </html>
