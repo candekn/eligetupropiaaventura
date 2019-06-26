@@ -21,6 +21,9 @@ public class Respuesta {
 	private Integer social;
 	private Integer dinero;
 	
+	@ManyToMany(mappedBy = "respuestas")
+	private List<Jugador> jugadores = new ArrayList<>();
+	
 	@ManyToOne
 	private Pregunta pregunta;
 	
@@ -91,6 +94,13 @@ public class Respuesta {
 		this.preguntaSiguiente = preguntaSiguiente;
 	}
 	
+	public List<Jugador> getJugadores() {
+		return jugadores;
+	}
+
+	public void setJugadores(List<Jugador> jugadores) {
+		this.jugadores = jugadores;
+	}
 	
 
 
