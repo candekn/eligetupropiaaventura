@@ -35,9 +35,9 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	}
 
 	@Override
-	public Jugador estadisticasJugador(Jugador mij) {
+	public Jugador estadisticasJugador() {
 		
-		return juegoDao.estadisticasJugador(mij);
+		return juegoDao.estadisticasJugador();
 	}
 
 	@Override

@@ -31,3 +31,5 @@ public interface ServicioJuego {
 	Pregunta mostrarGameOver(Long id);
 
 	void reiniciarPartida(Respuesta respuestaActual, Jugador objJugador);
+
+}
