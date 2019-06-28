@@ -13,7 +13,7 @@ Bueno, este debe ser el aula. Me peino un poco y entro.<br><br>
 - Jugador: Buenos dias profesor.<br>
 - Profesor: Buenas noches, en el fondo hay una silla desocupada.<br>
 - Profesor: Bien...El segundo calculo para resolver este ejercicio es...<br>
-No entiendo que esta explicando. <br>¿Deberia preguntarle a mi compañero?","imagenProbando.jpg"),
+No entiendo que esta explicando. <br>¿Deberia preguntarle a mi compañero?","aula.jpg"),
 (3,"Se lo ve muy concentrado, mejor no le hablo. <br>
 -Compañero: Disculpame, mi nombre es Pablo, ¿entendiste lo que el profesor explicaba sobre el rectangulo? <br>
 Lo miro y respondo.<br>

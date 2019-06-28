@@ -119,7 +119,7 @@ public class ControladorJuego {
 					
 		
 		}
-		return new ModelAndView("juego",modelo);
+		return new ModelAndView("juego2",modelo);
 		
 	}
 	

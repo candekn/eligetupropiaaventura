@@ -1,0 +1,12 @@
+.estadisticas{
+    height: 30px !important;
+    width: 30px !important;
+    display: block;
+    float: left;
+    margin-right: 2px;
+    margin-left: 5px;
+}
+.imgp{
+    max-width: 250px !important;
+    padding-top: 200px;
+}
