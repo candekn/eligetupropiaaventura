@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,6 +31,12 @@ public class UsuarioDaoImpl implements UsuarioDao {
 				.add(Restrictions.eq("email", usuario.getEmail()))
 				.add(Restrictions.eq("password", usuario.getPassword()))
 				.uniqueResult();
+	}
+	@Override
+	public void guardarUsuario(Usuario usuario)
+	{
+		final Session session = sessionFactory.getCurrentSession();
+		session.save(usuario);
 	}
 
 }

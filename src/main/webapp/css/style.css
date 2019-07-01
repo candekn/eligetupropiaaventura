@@ -10,3 +10,11 @@
     max-width: 250px !important;
     padding-top: 200px;
 }
+.bordes{
+    border-color: #4b0f12;
+    border-style: double;
+    border-radius: 5px;
+    max-width: 500px;
+    background-color: rgba(184, 127, 132, 0.66);
+}
+

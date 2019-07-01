@@ -29,7 +29,7 @@ public class ControladorJuego {
 	private ServicioJuego servicioJuego;
 
 	Jugador mij = new Jugador();
-	
+
 	@RequestMapping("/inicio")
 	public ModelAndView comenzar()
 			
@@ -46,7 +46,7 @@ public class ControladorJuego {
 		modelo.put("respuesta", respuesta);
 		return new ModelAndView("inicio",modelo);
 	}
-	
+
 	
 	
 	@RequestMapping(value = "/mostrarRuta", method = RequestMethod.POST)

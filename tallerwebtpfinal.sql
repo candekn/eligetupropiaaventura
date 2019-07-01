@@ -37,3 +37,8 @@ VALUES(100,30,30,30,200,"Jugar",null,1),
 
 SELECT * FROM RESPUESTA;
 SELECT * FROM PREGUNTA;
+
+INSERT INTO usuario(id, email, password)
+VALUES(1, 'cande@sama.com', '123456');
+
+SELECT * FROM usuario;

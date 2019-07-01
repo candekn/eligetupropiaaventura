@@ -116,5 +116,15 @@ public class Jugador {
 	public void setUltimaRespuesta(Long ultimaRespuesta) {
 		this.ultimaRespuesta = ultimaRespuesta;
 	}
+
+	public Jugador() {
+		this.rendimiento = 50;
+		this.estres = 50;
+		this.social = 50;
+		this.dinero = 100;
+		this.puntaje = 0;
+		this.ultimaRespuesta = null;
+		this.respuestas = null;
+	}
   	  
 }
