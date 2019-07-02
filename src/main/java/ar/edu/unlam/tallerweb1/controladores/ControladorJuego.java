@@ -86,7 +86,25 @@ public class ControladorJuego {
 
 		//Recibo una lista de las siguientes respuestas
 		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
-				
+		
+		
+		//Traigo la imagen de fondo
+		List<ImagenFondo> imgFondo = servicioJuego.buscarImagenDeFondo(siguientePregunta);
+		
+		for(ImagenFondo i: imgFondo)
+		{
+		
+			//Paso la img de fondo
+			modelo.put("imagenDeFondo", i.getNombreImgFondo());
+			
+		}
+		
+		//Traigo la imagen de los personajes
+				List<ImagenPersonaje> imgPersonajes = servicioJuego.buscarImagenesDePersonajes(siguientePregunta); 
+		
+				//Paso la img de los personajes
+				modelo.put("listaDePersonajes", imgPersonajes);
+			
 		//Recibo Estadisticas del Jugador
 		Estadistica objEstadisticas = servicioJuego.estadisticasJugador(mij);
 	
@@ -129,10 +147,6 @@ public class ControladorJuego {
 
 		}
 		
-	
-		
-		
-		
 		//Actualizar las estadisticas en la BD
 		servicioJuego.actualizarEstadisticas(objJugadorConEstadisticas);
 	
@@ -148,6 +162,6 @@ public class ControladorJuego {
 		return new ModelAndView("juego2",modelo);
 		
 	}
-	
 
 }
+
