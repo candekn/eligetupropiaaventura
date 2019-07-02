@@ -9,13 +9,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unlam.tallerweb1.modelo.Estadistica;
+import ar.edu.unlam.tallerweb1.modelo.ImagenFondo;
+import ar.edu.unlam.tallerweb1.modelo.ImagenPersonaje;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -29,31 +31,50 @@ public class ControladorJuego {
 	private ServicioJuego servicioJuego;
 
 	Jugador mij = new Jugador();
-
+	Estadistica mie = new Estadistica();
+	Respuesta respuesta = new Respuesta();
+	TablaJugadorRespuesta JR = new TablaJugadorRespuesta();
+	
 	@RequestMapping("/inicio")
 	public ModelAndView comenzar()
 			
 	{
 	 	//Guardar Jugador
 		ModelMap modelo = new ModelMap();
-		mij.setDinero(0);
-		mij.setEstres(0);
+		mie.setDinero(0);
+		mie.setEstres(0);
 		mij.setPuntaje(0);
-		mij.setRendimiento(0);
-		mij.setSocial(0);
-		Respuesta respuesta = new Respuesta();
+		mie.setRendimiento(0);
+		mie.setSocial(0);
+		
+		//Seteo un jugador a la tabla estadistica
+		mie.setJugador(mij);
+		
+		//Guardo en la BD
 		servicioJuego.guardarJugador(mij);
+		servicioJuego.guardarEstadisticas(mie);
+		
 		modelo.put("respuesta", respuesta);
 		return new ModelAndView("inicio",modelo);
 	}
-
+	
 	
 	
 	@RequestMapping(value = "/mostrarRuta", method = RequestMethod.POST)
 	public ModelAndView respuesta(@ModelAttribute("respuesta")Respuesta respuesta, HttpServletRequest request) //Requerido )	
 	{
 		ModelMap modelo = new ModelMap();
+		
+		
+
+		JR.setJugador(mij);
+		JR.setRespuesta(respuesta);
+		
+		//Guardo JugadorRespuesta en la BD
+		servicioJuego.guardarJR(JR);
+		
 	
+		
 		//Recibo los datos de la respuesta actual
 		Respuesta respuestaActual = servicioJuego.buscarRespuesta(respuesta); 
 		if(respuestaActual.getOpcion().equals("Inicio")){
@@ -65,12 +86,12 @@ public class ControladorJuego {
 
 		//Recibo una lista de las siguientes respuestas
 		List<Respuesta> miRespuesta = servicioJuego.buscarRespuestas(siguientePregunta);
-		
-		//Recibo jugador
-		Jugador objJugador = servicioJuego.estadisticasJugador();
+				
+		//Recibo Estadisticas del Jugador
+		Estadistica objEstadisticas = servicioJuego.estadisticasJugador(mij);
 	
-		
-		Jugador objJugadorConEstadisticas=servicioJuego.calcularEstadisticas(respuestaActual, objJugador);
+		//Calcular las estadisticas entre los valores de la respuesta y las estadisticas que ya tenia el jugador
+		Estadistica objJugadorConEstadisticas=servicioJuego.calcularEstadisticas(respuestaActual, objEstadisticas);
 		
 		//Si supera el 100% de estres o de social pierde el juego
 		if((objJugadorConEstadisticas.getEstres()>=100) || (objJugadorConEstadisticas.getRendimiento()<20) || (objJugadorConEstadisticas.getRendimiento()<20 && objJugadorConEstadisticas.getSocial()>70)){
@@ -92,7 +113,7 @@ public class ControladorJuego {
 
 			//Recibo una lista de las siguientes respuestas finales
 			List<Respuesta> opcionFinal = servicioJuego.buscarRespuestas(GameOver);
-			
+
 			
 			//Paso la lista de opciones a la vista
 			modelo.put("listaR", opcionFinal);
@@ -103,12 +124,17 @@ public class ControladorJuego {
 			//Paso la lista de opciones a la vista
 			modelo.put("listaR", miRespuesta);
 			modelo.put("pregunta", siguientePregunta);
-			//Metodo para guardar la partida					
-			servicioJuego.guardarPartida(objJugadorConEstadisticas);
+			
 			modelo.put("respuesta", respuesta);
 
 		}
-		servicioJuego.guardarPartida(objJugadorConEstadisticas);
+		
+	
+		
+		
+		
+		//Actualizar las estadisticas en la BD
+		servicioJuego.actualizarEstadisticas(objJugadorConEstadisticas);
 	
 			//Paso a la vista los resultados
 				modelo.put("rendimiento", objJugadorConEstadisticas.getRendimiento());
