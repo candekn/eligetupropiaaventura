@@ -40,4 +40,9 @@ public interface ServicioJuego {
 
 	void guardarEstadisticas(Estadistica mie);
 
+	List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta);
+
+	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
+
 }
+
