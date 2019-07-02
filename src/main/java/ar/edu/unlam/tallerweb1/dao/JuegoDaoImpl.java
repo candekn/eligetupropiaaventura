@@ -17,7 +17,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ar.edu.unlam.tallerweb1.modelo.Estadistica;
+import ar.edu.unlam.tallerweb1.modelo.ImagenFondo;
+import ar.edu.unlam.tallerweb1.modelo.ImagenPersonaje;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -37,30 +41,20 @@ public class JuegoDaoImpl implements JuegoDao {
 	
 	
 	@Override
-	public void guardarPartida(Jugador mij)
+	public void guardarEstadistica(Estadistica mie)
 	{
 		final Session session = sessionFactory.getCurrentSession();
-		session.update(mij);
+		session.save(mie);
 	}
 
 	@Override
-	public Jugador estadisticasJugador() {
+	public Estadistica estadisticasJugador(Jugador mij) {
 		
-		
+		Long id = (Long) mij.getId();
 		final Session session = sessionFactory.getCurrentSession();	
-        return (Jugador) session.createCriteria(Jugador.class)
-				
+        return (Estadistica) session.createCriteria(Estadistica.class)
+				.add(Restrictions.eq("jugador.id",id))
 				.uniqueResult();
-	}
-
-	
-	@Override
-	public List<Jugador> buscarJugadores() {
-		final Session session = sessionFactory.getCurrentSession();	
-		
-		List<Jugador> listJugador = session.createCriteria(Jugador.class)
-									.list();
-		return listJugador;
 	}
 	
 	@Override
@@ -107,8 +101,28 @@ final Session session = sessionFactory.getCurrentSession();
 	}
 
 
+	@Override
+	public void guardarJR(TablaJugadorRespuesta jr) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		session.save(jr);
+	}
 
 
+	@Override
+	public void actualizarEstadisticas(Estadistica mie) {
+		final Session session = sessionFactory.getCurrentSession();
+		session.update(mie);
+		
+	}
 
+
+	@Override
+	public void guardarEstadisticas(Estadistica mie) {
+	final Session session = sessionFactory.getCurrentSession();
+		
+		session.save(mie);
+		
+	}
 
 }
