@@ -125,4 +125,47 @@ final Session session = sessionFactory.getCurrentSession();
 		
 	}
 
+
+//	@Override
+//	public ImagenFondo buscarImagenDeFondo(Pregunta siguientePregunta) {
+//		final Session session = sessionFactory.getCurrentSession();	
+//		
+//		return (ImagenFondo) session.createCriteria(ImagenFondo.class)
+//									.createAlias("pregunta", "Tabla")
+//									.add(Restrictions.eq("Tabla.id", siguientePregunta.getId()))
+//									.uniqueResult();
+//		 
+//				
+//	}
+	
+	@Override
+	public List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta) {
+		final Session session = sessionFactory.getCurrentSession();	
+		
+		List<ImagenFondo> miF = session.createCriteria(ImagenFondo.class)
+									.createAlias("pregunta", "Tabla")
+									.add(Restrictions.eq("Tabla.id", siguientePregunta.getId()))
+									.list();
+		 
+				return miF;
+	}
+
+
+	@Override
+	public List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		//Long id = mif.getId();
+		
+		
+		List<ImagenPersonaje> misP = session.createCriteria(ImagenPersonaje.class)
+				.createAlias("preguntas", "p")
+				.add(Restrictions.eq("p.id", siguientePregunta.getId()))
+				.list();
+		
+		return misP;
+	}
+
+
 }
+
