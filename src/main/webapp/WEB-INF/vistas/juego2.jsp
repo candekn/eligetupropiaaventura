@@ -14,7 +14,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
-    <a class="navbar-brand" href="#">Título del juego</a>
+    <a class="navbar-brand" href="#">TÃ­tulo del juego</a>
 
     <div class="navbar">
         <ul class="navbar-nav mr-auto">
@@ -33,25 +33,26 @@
         </ul>
     </div>
 </nav>
-<div class="container-fluid"  style="background-image: url('img/${pregunta.imagen}');
+   
+ 
+<div class="container-fluid"  style="background-image: url('img/${imagenDeFondo}');
 background-size:cover; background-position: center;
 min-height: 450px">
+
 <!-- El "container" contiene las fotos de los personajes q van apareciendo. Hay que agregarlos al modelo y hacer un foreach para
-que aparezcan dependiendo la historia. Acá puse estos como ejemplo -->
+que aparezcan dependiendo la historia. AcÃ¡ puse estos como ejemplo -->
         <div class="container"> <!-- Container -->
         <div class="row">
+            
+           <c:forEach items="${listaDePersonajes}" var="lP">
             <div class="col-3 col-md-4">
-                <img src="img/Daiana%20(1).png" class="img-fluid imgp">
+                <img src="img/${lP.nombre}" class="img-fluid imgp">
             </div>
-            <div class="col-3 col-md-4">
-                <img src="img/Nicolas%20(5).png" class="img-fluid imgp">
-            </div>
-            <div class="col-3 col-md-4">
-                <img src="img/Pablo%20(4).png" class="img-fluid imgp">
-            </div>
+            </c:forEach>
         </div>
 	</div> <!-- /Container -->
     </div>
+    
     <div class="card-text text-dark bg-light"
          style="padding: 30px">
          ${pregunta.textoDeLaPregunta}
