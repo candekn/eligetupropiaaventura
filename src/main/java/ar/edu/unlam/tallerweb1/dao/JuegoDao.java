@@ -31,4 +31,9 @@ public interface JuegoDao {
 	void actualizarEstadisticas(Estadistica mie);
 
 	void guardarEstadisticas(Estadistica mie);
+
+	List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta);
+
+	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
+	
 }
