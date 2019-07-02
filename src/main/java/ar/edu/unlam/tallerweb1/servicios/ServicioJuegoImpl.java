@@ -128,5 +128,20 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		juegoDao.guardarEstadisticas(mie);
 		
 	}
-}
 
+
+	@Override
+	public List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta) {
+		
+		return juegoDao.buscarImagenDeFondo(siguientePregunta);
+	}
+
+
+	@Override
+	public List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta) {
+		return juegoDao.buscarImagenesDePersonajes( siguientePregunta);
+	}
+
+
+	
+}
