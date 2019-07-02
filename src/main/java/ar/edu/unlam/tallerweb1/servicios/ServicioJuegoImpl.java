@@ -7,10 +7,13 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import ar.edu.unlam.tallerweb1.modelo.ImagenPersonaje;
 import ar.edu.unlam.tallerweb1.dao.JuegoDao;
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
+import ar.edu.unlam.tallerweb1.modelo.Estadistica;
+import ar.edu.unlam.tallerweb1.modelo.ImagenFondo;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
@@ -29,15 +32,19 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	
 	
 	@Override
-	public void guardarPartida(Jugador mij)
-	{
-		juegoDao.guardarPartida(mij);
+	public TablaJugadorRespuesta guardarJugadoryRespuestaEnJR(Jugador mij, Respuesta mir, TablaJugadorRespuesta jr)
+	{	
+		jr.setJugador(mij);
+		jr.setRespuesta(mir);
+		
+		return jr;
+		
 	}
 
 	@Override
-	public Jugador estadisticasJugador() {
+	public Estadistica estadisticasJugador(Jugador mij) {
 		
-		return juegoDao.estadisticasJugador();
+		return juegoDao.estadisticasJugador(mij);
 	}
 
 	@Override
@@ -67,25 +74,18 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	}
 	
 	@Override
-	public void reiniciarPartida(Respuesta respuestaActual, Jugador objJugador) {
+	public void reiniciarPartida(Respuesta respuestaActual, Estadistica objEstadistica, TablaJugadorRespuesta objJR) {
 		Long id=(long) 100;
-		objJugador.setUltimaRespuesta(id);
+		objJR.getRespuesta().setId(id);
 
-		objJugador.setRendimiento(0);
-		objJugador.setDinero(0);
-		objJugador.setSocial(0);
-		objJugador.setEstres(0);
-	}
-	
-	/**/
-	@Override
-	public List<Jugador> buscarJugadores()
-	{
-		return juegoDao.buscarJugadores();
+		objEstadistica.setRendimiento(0);
+		objEstadistica.setDinero(0);
+		objEstadistica.setSocial(0);
+		objEstadistica.setEstres(0);
 	}
 	
 	@Override
-	public Jugador calcularEstadisticas(Respuesta respuestaActual, Jugador objJugador){
+	public Estadistica calcularEstadisticas(Respuesta respuestaActual, Estadistica objEstadistica){
 		Integer rendimiento=0;
 		Integer estres=0;
 		Integer social=0;
@@ -93,20 +93,40 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		
 		
 		//Suma lo que tenia, mas, el valor de la respuesta
-		 rendimiento= respuestaActual.getRendimiento()+objJugador.getRendimiento();
-		 estres= respuestaActual.getEstres()+objJugador.getEstres();
-		 social= respuestaActual.getSocial()+objJugador.getSocial();
-		 dinero= respuestaActual.getDinero()+objJugador.getDinero();
+		 rendimiento= respuestaActual.getRendimiento()+objEstadistica.getRendimiento();
+		 estres= respuestaActual.getEstres()+objEstadistica.getEstres();
+		 social= respuestaActual.getSocial()+objEstadistica.getSocial();
+		 dinero= respuestaActual.getDinero()+objEstadistica.getDinero();
  
-		objJugador.setUltimaRespuesta(respuestaActual.getId());
+		
+		 objEstadistica.setRendimiento(rendimiento);
+		 objEstadistica.setDinero(dinero);
+		 objEstadistica.setSocial(social);
+		 objEstadistica.setEstres(estres);
+		 
 
-		objJugador.setRendimiento(rendimiento);
-		objJugador.setDinero(dinero);
-		objJugador.setSocial(social);
-		objJugador.setEstres(estres);
-
-		return objJugador;
+		return objEstadistica;
 }
 
-	
+
+	@Override
+	public void actualizarEstadisticas(Estadistica mie) {
+		 juegoDao.actualizarEstadisticas(mie);
+		
+	}
+
+
+	@Override
+	public void guardarJR(TablaJugadorRespuesta jr) {
+		juegoDao.guardarJR(jr);
+		
+	}
+
+
+	@Override
+	public void guardarEstadisticas(Estadistica mie) {
+		juegoDao.guardarEstadisticas(mie);
+		
+	}
 }
+
