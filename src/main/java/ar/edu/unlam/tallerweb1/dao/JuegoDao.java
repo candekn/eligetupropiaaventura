@@ -36,4 +36,6 @@ public interface JuegoDao {
 
 	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
 	
+	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
+	
 }
