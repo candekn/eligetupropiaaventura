@@ -124,6 +124,21 @@ final Session session = sessionFactory.getCurrentSession();
 		session.save(mie);
 		
 	}
+	
+	@Override
+	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
+final Session session = sessionFactory.getCurrentSession();
+		
+		Long id = (Long) mij.getId();
+		
+		List<TablaJugadorRespuesta> misP = session.createCriteria(TablaJugadorRespuesta.class)
+				.createAlias("jugador", "jug")
+				.add(Restrictions.eq("jug.id", id))
+				
+				.list();
+		
+		return misP;
+	}
 
 
 //	@Override
