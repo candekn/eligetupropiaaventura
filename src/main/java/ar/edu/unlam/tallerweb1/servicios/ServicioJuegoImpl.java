@@ -141,6 +141,41 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	public List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta) {
 		return juegoDao.buscarImagenesDePersonajes( siguientePregunta);
 	}
+	
+	@Override
+	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
+		return juegoDao.buscarRespuestasAnteriores(mij);
+	}
+	
+	@Override
+	public List<Integer> calculoEstadisticas(List<TablaJugadorRespuesta> respuestasAnteriores, Estadistica mie) {
+	
+		Integer rendimiento=0;
+		Integer estres=0;
+		Integer social=0;
+		Integer dinero=0;
+		
+		List<Integer> resultados=new ArrayList<Integer>();
+	
+		for(TablaJugadorRespuesta j: respuestasAnteriores)
+		{	
+			//Suma lo que tenia, mas, el valor de la respuesta
+			 rendimiento+= j.getRespuesta().getRendimiento();
+			 estres+=  j.getRespuesta().getEstres();
+			 social+=  j.getRespuesta().getSocial();
+			 dinero+=  j.getRespuesta().getDinero();
+			 
+			
+		
+		}
+		 resultados.add(dinero);
+			 resultados.add(estres);
+			 resultados.add(social);
+			 resultados.add(rendimiento);
+		
+		return resultados;
+		
+	}
 
 
 	
