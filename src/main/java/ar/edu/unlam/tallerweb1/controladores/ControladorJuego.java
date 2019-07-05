@@ -1,5 +1,7 @@
+
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,18 +67,68 @@ public class ControladorJuego {
 	{
 		ModelMap modelo = new ModelMap();
 		
+		//Consulto las respuestas que dio el jugador
+		List<TablaJugadorRespuesta> respuestasAnteriores = servicioJuego.buscarRespuestasAnteriores(mij);
+		Long idRespuestaAnterior=(long) 0;
+		Long idRtaActual=(long) respuesta.getId();
+		Boolean contestada=false;
+		Integer red=0;
 		
-
+		//verifico si la respuesta actual ya fue contestada o no
+		for(TablaJugadorRespuesta i: respuestasAnteriores )
+		{
+			idRespuestaAnterior=i.getRespuesta().getId();
+		  if (idRespuestaAnterior.equals(idRtaActual) ){
+				
+			  contestada=true;
+			
+		     }
+			
+		}
+		
+		//si fue contestada por el momento lo redirigimos al inicio
+		 if (contestada==true ){
+				
+			return new ModelAndView("redirect:/inicio");
+		
+	     }
+		else{
+		
 		JR.setJugador(mij);
+		
+		
+		
 		JR.setRespuesta(respuesta);
 		
 		//Guardo JugadorRespuesta en la BD
 		servicioJuego.guardarJR(JR);
 		
-	
-		
 		//Recibo los datos de la respuesta actual
 		Respuesta respuestaActual = servicioJuego.buscarRespuesta(respuesta); 
+		
+		//Recibo Estadisticas del Jugador
+		Estadistica objEstadisticas = servicioJuego.estadisticasJugador(mij);
+	
+		//Consulto nuevamente las respuestas que dio el jugador
+		List<TablaJugadorRespuesta> respuestasAnteriores2 = servicioJuego.buscarRespuestasAnteriores(mij);
+		
+		//Calcular las estadisticas entre los valores de las respuestas que contesto el jugador
+		List<Integer> Resultados=servicioJuego.calculoEstadisticas(respuestasAnteriores2,mie);
+		
+		//Si el jugador ya respondio esa pregunta, no sumar estadisticas
+		//Obtengo cada uno de los resultados
+		Integer Dinero= Resultados.get(0);
+		Integer Estres= Resultados.get(1);
+		Integer Social= Resultados.get(2);
+		Integer Rendimiento= Resultados.get(3);
+				
+		
+		if(Dinero < 0)
+		{
+			return new ModelAndView("redirect:/DineroInsuficiente");
+		}else{
+		
+		// Si el jugador selecciono la opcion "Inicio", quiere decir que perdio y lo redirigimos al inicio
 		if(respuestaActual.getOpcion().equals("Inicio")){
 			return new ModelAndView("redirect:/inicio");
 			
@@ -94,74 +146,76 @@ public class ControladorJuego {
 		for(ImagenFondo i: imgFondo)
 		{
 		
-			//Paso la img de fondo
+			//Paso la img de fondo a la vista
 			modelo.put("imagenDeFondo", i.getNombreImgFondo());
+			
+			
 			
 		}
 		
-		//Traigo la imagen de los personajes
+		//Traigo las imagenes de los personajes
 				List<ImagenPersonaje> imgPersonajes = servicioJuego.buscarImagenesDePersonajes(siguientePregunta); 
 		
-				//Paso la img de los personajes
+				//Paso la img de los personajes a la vista
 				modelo.put("listaDePersonajes", imgPersonajes);
-			
-		//Recibo Estadisticas del Jugador
-		Estadistica objEstadisticas = servicioJuego.estadisticasJugador(mij);
+				
 	
-		//Calcular las estadisticas entre los valores de la respuesta y las estadisticas que ya tenia el jugador
-		Estadistica objJugadorConEstadisticas=servicioJuego.calcularEstadisticas(respuestaActual, objEstadisticas);
-		
-		//Si supera el 100% de estres o de social pierde el juego
-		if((objJugadorConEstadisticas.getEstres()>=100) || (objJugadorConEstadisticas.getRendimiento()<20) || (objJugadorConEstadisticas.getRendimiento()<20 && objJugadorConEstadisticas.getSocial()>70)){
-			Long id=(long) 0;
-			if(objJugadorConEstadisticas.getEstres()>=100)
-					{ id=(long) 4;
+		//Validamos que el jugador pierda el juego
+		if((Estres >= 100) || (Rendimiento < 20) || (Rendimiento<20 && Social>70)){
+			Long UltimaPregunta_id=(long) 0;
+			
+			//Si supera el 100% de estres pierde el juego por un colapso de estres
+			if(Estres >= 100)
+					{ 
+						UltimaPregunta_id=(long) 400;
 					}
-			else if(objJugadorConEstadisticas.getRendimiento()<20)
+			else 
+				//Si su rendimiento es menor que 20 pierde el juego
+				if(Rendimiento<20)
 					{
-						id=(long) 5;
+						UltimaPregunta_id=(long) 500;
 					}
 			
-			else if( (objJugadorConEstadisticas.getRendimiento()<20 && objJugadorConEstadisticas.getSocial()>70))
+			else 
+				//Si su rendimiento es menor que 20 pero su vida social es alta
+				//pierde el juego pero es popular
+				if( (Rendimiento<20 && Social>70))
 					{
-						 id=(long) 6;
+						UltimaPregunta_id=(long) 600;
 					}
-			//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
-			Pregunta GameOver = servicioJuego.mostrarGameOver(id) ;
+			
+			//Muestro en la vista que perdio por x motivo
+			Pregunta GameOver = servicioJuego.mostrarGameOver(UltimaPregunta_id) ;
 
-			//Recibo una lista de las siguientes respuestas finales
+			//Recibo una lista de las siguiente respuesta final
 			List<Respuesta> opcionFinal = servicioJuego.buscarRespuestas(GameOver);
 
 			
 			//Paso la lista de opciones a la vista
 			modelo.put("listaR", opcionFinal);
 			modelo.put("pregunta", GameOver);
+			
 			//servicioJuego.reiniciarPartida( respuestaActual, objJugador);
 			
 		}else{
-			//Paso la lista de opciones a la vista
+			//sino, Paso la lista de opciones a la vista para que siga jugando
 			modelo.put("listaR", miRespuesta);
 			modelo.put("pregunta", siguientePregunta);
-			
 			modelo.put("respuesta", respuesta);
 
 		}
 		
-		//Actualizar las estadisticas en la BD
-		servicioJuego.actualizarEstadisticas(objJugadorConEstadisticas);
 	
-			//Paso a la vista los resultados
-				modelo.put("rendimiento", objJugadorConEstadisticas.getRendimiento());
-				modelo.put("estres", objJugadorConEstadisticas.getEstres());
-				modelo.put("social", objJugadorConEstadisticas.getSocial());
-				modelo.put("dinero", objJugadorConEstadisticas.getDinero());
+			//Paso a la vista los resultados de las estadisticas
+				modelo.put("rendimiento", Rendimiento);
+				modelo.put("estres", Estres);
+				modelo.put("social", Social);
+				modelo.put("dinero", Dinero);
 		
 					
 		
 		}
-		return new ModelAndView("juego2",modelo);
-		
 	}
-
-}
-
+		return new ModelAndView("juego2",modelo);
+	     }	
+	}
