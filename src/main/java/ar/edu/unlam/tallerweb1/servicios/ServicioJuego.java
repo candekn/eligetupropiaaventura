@@ -43,6 +43,10 @@ public interface ServicioJuego {
 	List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta);
 
 	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
+	
+	List<Integer> calculoEstadisticas(List<TablaJugadorRespuesta> respuestasAnteriores, Estadistica mie);
+	
+	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
 
 }
 
