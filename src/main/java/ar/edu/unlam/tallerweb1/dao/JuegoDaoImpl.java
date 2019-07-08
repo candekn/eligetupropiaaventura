@@ -146,7 +146,17 @@ final Session session = sessionFactory.getCurrentSession();
 		return misP;
 	}
 
-	
+	@Override
+	public Pregunta buscarPreguntaAnterior(Respuesta ultRespuesta) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		
+		 return (Pregunta) session.createCriteria(Pregunta.class)
+				 .createAlias("respuesta", "listRespuestas")
+					.add(Restrictions.eq("listRespuestas.id",ultRespuesta.getId()) )
+					.uniqueResult();
+	}
+
 
 	@Override
 	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
@@ -162,6 +172,67 @@ final Session session = sessionFactory.getCurrentSession();
 		
 		return misP;
 	}
+
+
+	@Override
+	public Respuesta buscarRespuestaB(Long segundaOpcion) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		 return (Respuesta) session.createCriteria(Respuesta.class)
+					.add(Restrictions.eq("id",segundaOpcion) )
+					.uniqueResult();
+	}
+
+
+	@Override
+	public TablaJugadorRespuesta eliminarLaRespuestaDeLaTablaJR(Long id_ultimaRespuesta) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		
+		TablaJugadorRespuesta jr =(TablaJugadorRespuesta) session.createCriteria(TablaJugadorRespuesta.class)
+				.createAlias("respuesta", "rta")
+				.add(Restrictions.eq("rta.id", id_ultimaRespuesta));
+		//session.delete(jr);
+		return jr;
+		
+	}
+
+
+	@Override
+	public void eliminarLaRespuestaDeJR(Long id_ultimaRespuesta) {
+final Session session = sessionFactory.getCurrentSession();
+		
+List<TablaJugadorRespuesta> jr = session.createCriteria(TablaJugadorRespuesta.class)
+				.createAlias("respuesta", "rta")
+				.add(Restrictions.eq("rta.id", id_ultimaRespuesta))
+				.list();
+Respuesta rta;
+for(TablaJugadorRespuesta j: jr)
+{	
+	 
+	rta=j.getRespuesta();
+	session.delete(rta);
+}
+		
+	}
+
+
+
+
+	
+	@Override
+	public void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento, Estadistica mie) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		mie.setDinero(dinero);
+		mie.setEstres(estres);
+		mie.setSocial(social);
+		mie.setRendimiento(rendimiento);
+		
+		session.update(mie);
+		
+	}
+
 
 
 

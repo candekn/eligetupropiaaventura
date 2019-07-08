@@ -46,6 +46,17 @@ public interface ServicioJuego {
 	
 	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
 
+	Respuesta buscarRespuestaB(Long segundaOpcion);
+	
+Pregunta buscarPreguntaAnterior(Respuesta ultRespuesta);
+
+TablaJugadorRespuesta eliminarLaRespuestaDeLaTablaJR(Long id_ultimaRespuesta);
+
+void eliminarLaRespuestaDeJR(Long id_ultimaRespuesta);
+
+void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento, Estadistica mie);
+
+
 	
 	//Estadistica calcularEstadisticas(Respuesta respuestaActual,Estadistica objEstadisticas);
 	//void actualizarEstadisticas(Estadistica mie); **por ahora no persistimos las estadisticas

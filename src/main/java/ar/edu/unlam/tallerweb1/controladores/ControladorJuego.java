@@ -41,6 +41,10 @@ public class ControladorJuego {
 	@Inject
 	private ServicioLogin servicioLogin;
 
+	
+	
+	
+	
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/home")
 	public ModelAndView irAHome() {
@@ -55,6 +59,11 @@ public class ControladorJuego {
 		return new ModelAndView("home", modelo);
 	}
 
+	
+	
+	
+	
+	
 	// Este metodo escucha la URL validar-login siempre y cuando se invoque con metodo http POST
 	// El método recibe un objeto Usuario el que tiene los datos ingresados en el form correspondiente y se corresponde con el modelAttribute definido en el
 	// tag form:form
@@ -76,17 +85,34 @@ public class ControladorJuego {
 		return new ModelAndView("home", model);
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/home");
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping(path= "/registro", method= RequestMethod.POST)
-	public ModelAndView registro(@ModelAttribute("jugador") Jugador jugador, String pass2, HttpServletRequest request){
+	public ModelAndView registro(@ModelAttribute("jugador") Jugador jugador, String pass2, HttpServletRequest request)
+	{
 		ModelMap model = new ModelMap();
 		if(0!=pass2.compareTo(jugador.getPassword())){
-			model.put("error", "Las contraseña coinciden");
+			model.put("error", "Las contraseñas no coinciden");
 		}else{
 			Jugador usuarioBuscado = servicioLogin.consultarJugador(jugador);
 			if(usuarioBuscado==null){
@@ -110,6 +136,7 @@ public class ControladorJuego {
 				//servicioJuego.guardarJugador(mij);
 				servicioJuego.guardarEstadisticas(mie);
 				
+				
 		
 				
 				return new ModelAndView("redirect:/inicio");
@@ -119,6 +146,14 @@ public class ControladorJuego {
 		}
 		return new ModelAndView("home", model);
 	}	
+	
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/inicio")
 	public ModelAndView comenzar()
 			
@@ -129,6 +164,10 @@ public class ControladorJuego {
 		modelo.put("respuesta", respuesta);
 		return new ModelAndView("inicio",modelo);
 	}
+	
+	
+	
+	
 	
 	
 	
@@ -228,7 +267,12 @@ public class ControladorJuego {
 				}
 		 }//fin if contestada
 		 
-		 
+		 else
+		 {
+			 modelo.put("contestada", true);
+			 modelo.put("aviso", "Esta pregunta ya ha sido respondida.");
+			 modelo.put("estado", true);
+		 }
 		 
 	
 		//Recibo el objeto pregunta que tenga la ruta asociada a la respuesta elegida por el jugador
@@ -321,6 +365,42 @@ public class ControladorJuego {
 	    // }fin else	
 	}//fin action
 	
+	
+	@RequestMapping("/DineroInsuficiente")
+	public ModelAndView MostrarVistaDeQueNoDisponeDeEseDinero()
+	{
+		ModelMap modelo = new ModelMap();
+		
+		//Traigo todas las respuestas que dio el jugador
+		List<TablaJugadorRespuesta> respuestasAnteriores = servicioJuego.buscarRespuestasAnteriores(mij);
+			
+		//Tamaño de la lista de respuestas
+		Integer ultRespuesta = (respuestasAnteriores.size());		
+		
+		//Ultima respuesta que dio el jugador
+		ultRespuesta=ultRespuesta -1;
+		
+		
+		// Obtenemos el ID de la ultima respuesta
+		Long id_ultimaRespuesta = respuestasAnteriores.get(ultRespuesta).getRespuesta().getId();
+		
+		//Trae la respuesta actual sumandole 1: Ej: id 100 (Respuesta que SI) + 1 (Respuesta siguiente, que NO)
+		Long uno=(long) 1;
+		
+		// La opcion "siguiente" que esta en la vista "SinDinero"
+		//nos lleva a la siguiente pregunta, como si hubiese elegido
+		//la opcion de la vista anterior ej: "no comprar"(Segunda Respuesta)
+		Long SegundaRespuesta_id = id_ultimaRespuesta + uno;
+		
+		//Recibo los datos de la respuesta Siguiente
+		Respuesta SegundaRespuesta = servicioJuego.buscarRespuestaB(SegundaRespuesta_id);
+	
+		modelo.put("RespuestaSiguiente",SegundaRespuesta.getId() );
+		modelo.put("respuesta", respuesta);
+		//servicioJuego.eliminarLaRespuestaDeJR(id_ultimaRespuesta);
+		//TablaJugadorRespuesta jr=servicioJuego.eliminarLaRespuestaDeLaTablaJR(id_ultimaRespuesta);
+		return new ModelAndView("SinDinero",modelo);
+	}
 
 	
 }

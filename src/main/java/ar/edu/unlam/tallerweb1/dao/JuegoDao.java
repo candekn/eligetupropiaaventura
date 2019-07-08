@@ -35,9 +35,17 @@ public interface JuegoDao {
 
 	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
 	
+	Pregunta buscarPreguntaAnterior(Respuesta ultRespuesta);
 
 	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
 
+	Respuesta buscarRespuestaB(Long segundaOpcion);
+
+	TablaJugadorRespuesta eliminarLaRespuestaDeLaTablaJR(Long id_ultimaRespuesta);
+
+	void  eliminarLaRespuestaDeJR(Long id_ultimaRespuesta);
+
+	void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento, Estadistica mie);
 
 	
 	

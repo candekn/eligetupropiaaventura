@@ -74,8 +74,6 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		
 	}
 	
-	
-	//...
 	@Override
 	public void reiniciarPartida(Respuesta respuestaActual, Estadistica objEstadistica, TablaJugadorRespuesta objJR) {
 		Long id=(long) 100;
@@ -124,12 +122,22 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	}
 */
 
-	
+	@Override
+	public Pregunta buscarPreguntaAnterior(Respuesta ultRespuesta) {
+		return juegoDao.buscarPreguntaAnterior(ultRespuesta);
+	}
 
 
 	@Override
 	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
 		return juegoDao.buscarRespuestasAnteriores(mij);
+	}
+
+
+	@Override
+	public Respuesta buscarRespuestaB(Long segundaOpcion) {
+		
+		return juegoDao.buscarRespuestaB(segundaOpcion);
 	}
 
 
@@ -164,8 +172,28 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	}
 
 
+	@Override
+	public TablaJugadorRespuesta eliminarLaRespuestaDeLaTablaJR(Long id_ultimaRespuesta) {
+		return juegoDao.eliminarLaRespuestaDeLaTablaJR(id_ultimaRespuesta);
+		
+	}
 
-	
+
+	@Override
+	public void eliminarLaRespuestaDeJR(Long id_ultimaRespuesta) {
+		
+		juegoDao.eliminarLaRespuestaDeJR(id_ultimaRespuesta);
+	}
+
+
+	@Override
+	public void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento,
+			Estadistica mie) {
+		
+		juegoDao.actualizarEstadisticas( dinero, estres, social,  rendimiento, mie);
+		
+	}
+
 
 	
 	
