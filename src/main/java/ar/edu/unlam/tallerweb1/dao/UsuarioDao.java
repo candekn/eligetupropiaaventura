@@ -1,10 +1,10 @@
 package ar.edu.unlam.tallerweb1.dao;
 
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
 // Interface que define los metodos del DAO de Usuarios.
 public interface UsuarioDao {
 	
-	Usuario consultarUsuario (Usuario usuario);
-	void guardarUsuario(Usuario usuario);
+	Jugador consultarJugador(Jugador usuario);
+	void guardarJugador(Jugador usuario);
 }

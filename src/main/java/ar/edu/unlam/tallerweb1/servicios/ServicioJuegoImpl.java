@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,7 +17,7 @@ import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
 @Service("ServicioJuego")
 @Transactional
@@ -73,6 +74,8 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		
 	}
 	
+	
+	//...
 	@Override
 	public void reiniciarPartida(Respuesta respuestaActual, Estadistica objEstadistica, TablaJugadorRespuesta objJR) {
 		Long id=(long) 100;
@@ -83,37 +86,8 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		objEstadistica.setSocial(0);
 		objEstadistica.setEstres(0);
 	}
-	
-	@Override
-	public Estadistica calcularEstadisticas(Respuesta respuestaActual, Estadistica objEstadistica){
-		Integer rendimiento=0;
-		Integer estres=0;
-		Integer social=0;
-		Integer dinero=0;
-		
-		
-		//Suma lo que tenia, mas, el valor de la respuesta
-		 rendimiento= respuestaActual.getRendimiento()+objEstadistica.getRendimiento();
-		 estres= respuestaActual.getEstres()+objEstadistica.getEstres();
-		 social= respuestaActual.getSocial()+objEstadistica.getSocial();
-		 dinero= respuestaActual.getDinero()+objEstadistica.getDinero();
- 
-		
-		 objEstadistica.setRendimiento(rendimiento);
-		 objEstadistica.setDinero(dinero);
-		 objEstadistica.setSocial(social);
-		 objEstadistica.setEstres(estres);
-		 
-
-		return objEstadistica;
-}
 
 
-	@Override
-	public void actualizarEstadisticas(Estadistica mie) {
-		 juegoDao.actualizarEstadisticas(mie);
-		
-	}
 
 
 	@Override
@@ -141,12 +115,24 @@ public class ServicioJuegoImpl implements ServicioJuego {
 	public List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta) {
 		return juegoDao.buscarImagenesDePersonajes( siguientePregunta);
 	}
+/*
+
+	@Override
+	public List<Respuesta> buscarRespuestasAnteriores(Jugador mij) {
+		
+		return juegoDao.buscarRespuestasAnteriores(mij);
+	}
+*/
+
 	
+
+
 	@Override
 	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
 		return juegoDao.buscarRespuestasAnteriores(mij);
 	}
-	
+
+
 	@Override
 	public List<Integer> calculoEstadisticas(List<TablaJugadorRespuesta> respuestasAnteriores, Estadistica mie) {
 	
@@ -168,7 +154,7 @@ public class ServicioJuegoImpl implements ServicioJuego {
 			
 		
 		}
-		 resultados.add(dinero);
+			resultados.add(dinero);
 			 resultados.add(estres);
 			 resultados.add(social);
 			 resultados.add(rendimiento);
@@ -177,6 +163,44 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		
 	}
 
+
+
+	
+
+	
+	
+	
+/*No lo usamos por ahora
+ 	
+	@Override
+	public Estadistica calcularEstadisticas(Respuesta respuestaActual, Estadistica objEstadistica){
+		Integer rendimiento=0;
+		Integer estres=0;
+		Integer social=0;
+		Integer dinero=0;
+		
+		
+		//Suma lo que tenia, mas, el valor de la respuesta
+		 rendimiento= respuestaActual.getRendimiento()+objEstadistica.getRendimiento();
+		 estres= respuestaActual.getEstres()+objEstadistica.getEstres();
+		 social= respuestaActual.getSocial()+objEstadistica.getSocial();
+		 dinero= respuestaActual.getDinero()+objEstadistica.getDinero();
+ 
+		
+		 objEstadistica.setRendimiento(rendimiento);
+		 objEstadistica.setDinero(dinero);
+		 objEstadistica.setSocial(social);
+		 objEstadistica.setEstres(estres);
+		 
+
+		return objEstadistica;
+}
+*/
+	
+	
+	
+
+	
 
 	
 }

@@ -16,7 +16,7 @@
 	<import resource="classpath:hibernateContext.xml" />
 
 	<!--Se indica que la configuracion del MVC se hará utilizanbdo anotaciones-->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven /> 
 
 	<!--Se indica que el transaction manager a utilizar en la capa de servicios es el bean declarado en hibernateContext.xml-->
 	<tx:annotation-driven transaction-manager="transactionManager" />

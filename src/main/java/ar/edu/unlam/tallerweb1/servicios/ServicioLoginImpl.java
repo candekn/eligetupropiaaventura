@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ar.edu.unlam.tallerweb1.dao.UsuarioDao;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
 // Implelemtacion del Servicio de usuarios, la anotacion @Service indica a Spring que esta clase es un componente que debe
 // ser manejado por el framework, debe indicarse en applicationContext que busque en el paquete ar.edu.unlam.tallerweb1.servicios
@@ -22,12 +22,12 @@ public class ServicioLoginImpl implements ServicioLogin {
 	private UsuarioDao servicioLoginDao;
 
 	@Override
-	public Usuario consultarUsuario (Usuario usuario) {
-		return servicioLoginDao.consultarUsuario(usuario);
+	public Jugador consultarJugador (Jugador jugador) {
+		return servicioLoginDao.consultarJugador(jugador);
 	}
 	@Override
-	public void guardarUsuario (Usuario usuario){
-		servicioLoginDao.guardarUsuario(usuario);
+	public void guardarJugador (Jugador jugador){
+		servicioLoginDao.guardarJugador(jugador);
 	}
 
 }

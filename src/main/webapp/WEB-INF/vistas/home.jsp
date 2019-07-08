@@ -24,12 +24,12 @@
     <div class="row">
         <div class="col-12 col-md-6">
             <div class="container-fluid bordes">
-                <form:form class="form-check" modelAttribute="usuario" method="post" action="registro">
+                <form:form class="form-check" modelAttribute="jugador" method="post" action="registro">
                     <h3 class="text-center">Registrarse</h3>
                
                     <div class="form-group">
                         <label>Nombre: </label>
-                        <input class="form-control" type="text" id="nombre" name="nombre" />
+                        <input class="form-control" type="text" path="nombre" />
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
@@ -53,7 +53,7 @@
         </div> <!--/primer col registro-->
         <div class="col-12 col-md-6">
             <div class="container-fluid bordes">
-                <form:form class="form-check" modelAttribute="usuario" method="post" action="validar-login">
+                <form:form class="form-check" modelAttribute="jugador" method="post" action="validar-login">
                     <h3 class="text-center">Ingresar</h3>
                     <div class="form-group">
                         <label>Email:</label>

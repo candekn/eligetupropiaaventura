@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Pregunta {
@@ -23,8 +24,6 @@ public class Pregunta {
 	private String textoDeLaPregunta;
 
 
-	private String estado;
-
 
 		@ManyToMany()
 	  @JoinTable(name="TablaPreguntaPersonaje", 
@@ -33,11 +32,11 @@ public class Pregunta {
 		    private List<ImagenPersonaje> personajes;
 
 	
-	
-
-	
 	@ManyToOne
 	private ImagenFondo imagenfondo;
+	
+	@OneToMany
+	private List<Respuesta> respuesta;
 	
 	public Long getId() {
 		return id;
@@ -52,12 +51,6 @@ public class Pregunta {
 		this.textoDeLaPregunta = textoDeLaPregunta;
 	}
 	
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
 	
 	public ImagenFondo getImagenfondo() {
 		return imagenfondo;
@@ -71,5 +64,17 @@ public class Pregunta {
 	public void setPersonajes(List<ImagenPersonaje> personajes) {
 		this.personajes = personajes;
 	}
+	public List<Respuesta> getRespuesta() {
+		return respuesta;
+	}
+	public void setRespuesta(List<Respuesta> respuesta) {
+		this.respuesta = respuesta;
+	}
+	
 
+	
+	
+	
+
+	
 }

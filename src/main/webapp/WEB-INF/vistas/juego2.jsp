@@ -11,10 +11,23 @@
     <link href="css/style.css" type="text/css" rel="stylesheet">
     <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
     <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    
+    <script>
+    	if(history.forward(1) )
+    	{
+    		location.replace(history.forward(1))
+    		
+    	}
+    </script>
+    
+  
+    
 </head>
 <body>
+
+
 <nav class="navbar navbar-expand-md navbar-light bg-light mb-4">
-    <a class="navbar-brand" href="#">TÃ­tulo del juego</a>
+    <a class="navbar-brand" href="#">Título del juego</a>
 
     <div class="navbar">
         <ul class="navbar-nav mr-auto">
@@ -40,10 +53,10 @@ background-size:cover; background-position: center;
 min-height: 450px">
 
 <!-- El "container" contiene las fotos de los personajes q van apareciendo. Hay que agregarlos al modelo y hacer un foreach para
-que aparezcan dependiendo la historia. AcÃ¡ puse estos como ejemplo -->
+que aparezcan dependiendo la historia. Acá puse estos como ejemplo -->
         <div class="container"> <!-- Container -->
         <div class="row">
-            
+           
            <c:forEach items="${listaDePersonajes}" var="lP">
             <div class="col-3 col-md-4">
                 <img src="img/${lP.nombre}" class="img-fluid imgp">

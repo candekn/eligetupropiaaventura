@@ -22,9 +22,11 @@ public class Jugador {
 	private Long id;
 	private String nombre;
 	private Integer puntaje;
+	private String email;
+	private String password;
 	
-	@OneToOne
-	private Usuario usuario;
+	
+	
 	  
 	@ManyToMany()
 	  @JoinTable(name="JugadorRespuesta", 
@@ -57,13 +59,7 @@ public class Jugador {
 		this.puntaje = puntaje;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	
 
 	public List<Respuesta> getRespuestas() {
 		return respuestas;
@@ -72,6 +68,22 @@ public class Jugador {
 	public void setRespuestas(List<Respuesta> respuestas) {
 		this.respuestas = respuestas;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
   	  
 }
-

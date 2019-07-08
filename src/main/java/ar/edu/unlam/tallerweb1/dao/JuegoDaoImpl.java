@@ -24,7 +24,7 @@ import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
 @Repository("JuegoDao")
 public class JuegoDaoImpl implements JuegoDao {
@@ -109,13 +109,6 @@ final Session session = sessionFactory.getCurrentSession();
 	}
 
 
-	@Override
-	public void actualizarEstadisticas(Estadistica mie) {
-		final Session session = sessionFactory.getCurrentSession();
-		session.update(mie);
-		
-	}
-
 
 	@Override
 	public void guardarEstadisticas(Estadistica mie) {
@@ -123,36 +116,11 @@ final Session session = sessionFactory.getCurrentSession();
 		
 		session.save(mie);
 		
-	}
-	
-	@Override
-	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
-final Session session = sessionFactory.getCurrentSession();
 		
-		Long id = (Long) mij.getId();
-		
-		List<TablaJugadorRespuesta> misP = session.createCriteria(TablaJugadorRespuesta.class)
-				.createAlias("jugador", "jug")
-				.add(Restrictions.eq("jug.id", id))
-				
-				.list();
-		
-		return misP;
 	}
 
 
-//	@Override
-//	public ImagenFondo buscarImagenDeFondo(Pregunta siguientePregunta) {
-//		final Session session = sessionFactory.getCurrentSession();	
-//		
-//		return (ImagenFondo) session.createCriteria(ImagenFondo.class)
-//									.createAlias("pregunta", "Tabla")
-//									.add(Restrictions.eq("Tabla.id", siguientePregunta.getId()))
-//									.uniqueResult();
-//		 
-//				
-//	}
-	
+/**/	
 	@Override
 	public List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta) {
 		final Session session = sessionFactory.getCurrentSession();	
@@ -170,9 +138,6 @@ final Session session = sessionFactory.getCurrentSession();
 	public List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta) {
 		final Session session = sessionFactory.getCurrentSession();
 		
-		//Long id = mif.getId();
-		
-		
 		List<ImagenPersonaje> misP = session.createCriteria(ImagenPersonaje.class)
 				.createAlias("preguntas", "p")
 				.add(Restrictions.eq("p.id", siguientePregunta.getId()))
@@ -181,6 +146,43 @@ final Session session = sessionFactory.getCurrentSession();
 		return misP;
 	}
 
+	
+
+	@Override
+	public List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij) {
+final Session session = sessionFactory.getCurrentSession();
+		
+		Long id = (Long) mij.getId();
+		
+		List<TablaJugadorRespuesta> misP = session.createCriteria(TablaJugadorRespuesta.class)
+				.createAlias("jugador", "jug")
+				.add(Restrictions.eq("jug.id", id))
+				
+				.list();
+		
+		return misP;
+	}
+
+
+
+
+	/*
+	@Override
+	public List<Respuesta> buscarRespuestasAnteriores(Jugador mij) {
+		final Session session = sessionFactory.getCurrentSession();
+		
+		Long id = (Long) mij.getId();
+		
+		List<Respuesta> misP = session.createCriteria(Respuesta.class)
+				.createAlias("tablajr", "jr")
+				.createAlias("jr.jugador", "jug")
+				.add(Restrictions.eq("jug.id", id))
+				
+				.list();
+		
+		return misP;
+	}
+*/
+
 
 }
-

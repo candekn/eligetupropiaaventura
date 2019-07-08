@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;@Entity
 public class Respuesta {
 	
@@ -23,6 +24,7 @@ public class Respuesta {
 	private Integer estres;
 	private Integer social;
 	private Integer dinero;
+	private Integer gasto;
 	
 	@ManyToMany(mappedBy = "respuestas")
 	private List<Jugador> jugadores = new ArrayList<>();
@@ -32,6 +34,9 @@ public class Respuesta {
 	
 	@OneToOne
 	private Pregunta preguntaSiguiente;
+	
+	@OneToMany
+	private List<TablaJugadorRespuesta> tablajr;
 
 	public Long getId() {
 		return id;
@@ -104,6 +109,23 @@ public class Respuesta {
 	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
 	}
+
+	public List<TablaJugadorRespuesta> getTablajr() {
+		return tablajr;
+	}
+
+	public void setTablajr(List<TablaJugadorRespuesta> tablajr) {
+		this.tablajr = tablajr;
+	}
+
+	public Integer getGasto() {
+		return gasto;
+	}
+
+	public void setGasto(Integer gasto) {
+		this.gasto = gasto;
+	}
+
 	
 
 

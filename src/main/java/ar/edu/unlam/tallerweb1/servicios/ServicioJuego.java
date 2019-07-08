@@ -10,7 +10,7 @@ import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
-import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
 
 public interface ServicioJuego {
@@ -28,25 +28,25 @@ public interface ServicioJuego {
 
 	Respuesta buscarRespuesta(Respuesta respuesta);
 
-	Estadistica calcularEstadisticas(Respuesta respuestaActual,Estadistica objEstadisticas);
-
 	Pregunta mostrarGameOver(Long id);
 
 	void reiniciarPartida(Respuesta respuestaActual, Estadistica objEstadistica, TablaJugadorRespuesta objJR);
 
-	void actualizarEstadisticas(Estadistica mie);
-
 	void guardarJR(TablaJugadorRespuesta jRconJugadoryRespuesta);
 
-	void guardarEstadisticas(Estadistica mie);
+/**/void guardarEstadisticas(Estadistica mie);
 
 	List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta);
 
 	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
+
+	
 	
 	List<Integer> calculoEstadisticas(List<TablaJugadorRespuesta> respuestasAnteriores, Estadistica mie);
 	
 	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
 
+	
+	//Estadistica calcularEstadisticas(Respuesta respuestaActual,Estadistica objEstadisticas);
+	//void actualizarEstadisticas(Estadistica mie); **por ahora no persistimos las estadisticas
 }
-

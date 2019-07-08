@@ -28,14 +28,18 @@ public interface JuegoDao {
 
 	void guardarJR(TablaJugadorRespuesta jr);
 
-	void actualizarEstadisticas(Estadistica mie);
-
 	void guardarEstadisticas(Estadistica mie);
 
+	/**/
 	List<ImagenFondo> buscarImagenDeFondo(Pregunta siguientePregunta);
 
 	List<ImagenPersonaje> buscarImagenesDePersonajes(Pregunta siguientePregunta);
 	
+
 	List<TablaJugadorRespuesta> buscarRespuestasAnteriores(Jugador mij);
+
+
+	
+	
 	
 }
