@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -34,6 +35,7 @@ public class ControladorJuego {
 	Estadistica mie = new Estadistica();
 	Respuesta respuesta = new Respuesta();
 	TablaJugadorRespuesta JR = new TablaJugadorRespuesta();
+	ArrayList ranking = new ArrayList();
 
 	// La anotacion @Inject indica a Spring que en este atributo se debe setear (inyeccion de dependencias)
 	// un objeto de una clase que implemente la interface ServicioLogin, dicha clase debe estar anotada como
@@ -357,7 +359,7 @@ public class ControladorJuego {
 				modelo.put("social", miEstadistica.getSocial());
 				modelo.put("dinero", miEstadistica.getDinero());
 		
-					
+				//ranking
 		
 		
 	

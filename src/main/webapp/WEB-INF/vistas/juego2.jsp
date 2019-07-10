@@ -47,7 +47,9 @@
     </div>
 </nav>
    
- 
+<div class=row>
+
+<div class="col-8 col-md-10">
 <div class="container-fluid"  style="background-image: url('img/${imagenDeFondo}');
 background-size:cover; background-position: center;
 min-height: 450px">
@@ -77,5 +79,19 @@ que aparezcan dependiendo la historia. Acá puse estos como ejemplo -->
 			</form:form>
         </div>
     </div>
+</div>
+	<div class="col-3 col-md-2 bg-light">
+		<div class="container-fluid">
+			<h2>Ranking</h2>
+			<p>Mejores promedios</p>
+			<ol>
+	<!-- 		<c:forEach items="${ranking}" var="r">
+				<li>"${r}"
+			</c:forEach> -->
+			</ol>
+		</div>
+	</div>
+</div>
+
 </body>
 </html>
