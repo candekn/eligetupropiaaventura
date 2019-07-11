@@ -29,7 +29,7 @@
                
                     <div class="form-group">
                         <label>Nombre: </label>
-                        <input class="form-control" type="text" path="nombre" />
+                        <form:input class="form-control" type="text" path="nombre" />
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
