@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,6 +10,7 @@ import ar.edu.unlam.tallerweb1.modelo.ImagenFondo;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorExamen;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
@@ -56,7 +58,7 @@ void eliminarLaRespuestaDeJR(Long id_ultimaRespuesta);
 
 void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento, Estadistica mie);
 
-
+ArrayList<TablaJugadorExamen> traerMejores();
 	
 	//Estadistica calcularEstadisticas(Respuesta respuestaActual,Estadistica objEstadisticas);
 	//void actualizarEstadisticas(Estadistica mie); **por ahora no persistimos las estadisticas

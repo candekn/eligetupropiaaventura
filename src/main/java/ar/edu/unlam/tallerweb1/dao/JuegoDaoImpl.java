@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import ar.edu.unlam.tallerweb1.modelo.ImagenPersonaje;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorExamen;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
@@ -233,7 +235,15 @@ for(TablaJugadorRespuesta j: jr)
 		
 	}
 
-
+	@Override
+	public ArrayList<TablaJugadorExamen> traerMejores(){
+		final Session session = sessionFactory.getCurrentSession();
+		ArrayList<TablaJugadorExamen> mejores = (ArrayList<TablaJugadorExamen>) session.createCriteria(TablaJugadorExamen.class)
+												.addOrder(Order.desc("nota"))
+												.setMaxResults(10)
+												.list();
+		return mejores;
+	}
 
 
 

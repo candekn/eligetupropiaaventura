@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ar.edu.unlam.tallerweb1.modelo.Estadistica;
@@ -8,6 +9,7 @@ import ar.edu.unlam.tallerweb1.modelo.ImagenPersonaje;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorExamen;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 
 public interface JuegoDao {
@@ -47,6 +49,7 @@ public interface JuegoDao {
 
 	void actualizarEstadisticas(Integer dinero, Integer estres, Integer social, Integer rendimiento, Estadistica mie);
 
+	ArrayList<TablaJugadorExamen> traerMejores();
 	
 	
 	

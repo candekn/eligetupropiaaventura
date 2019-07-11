@@ -85,9 +85,9 @@ que aparezcan dependiendo la historia. Acá puse estos como ejemplo -->
 			<h2>Ranking</h2>
 			<p>Mejores promedios</p>
 			<ol>
-	<!-- 		<c:forEach items="${ranking}" var="r">
-				<li>"${r}"
-			</c:forEach> -->
+	 		<c:forEach items="${ranking}" var="r">
+				<li>${r.jugador.nombre} : ${r.nota}
+			</c:forEach> 
 			</ol>
 		</div>
 	</div>

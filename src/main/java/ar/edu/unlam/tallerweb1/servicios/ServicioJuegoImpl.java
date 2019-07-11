@@ -16,6 +16,7 @@ import ar.edu.unlam.tallerweb1.modelo.ImagenFondo;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 import ar.edu.unlam.tallerweb1.modelo.TablaJugadorRespuesta;
 import ar.edu.unlam.tallerweb1.modelo.Respuesta;
+import ar.edu.unlam.tallerweb1.modelo.TablaJugadorExamen;
 import ar.edu.unlam.tallerweb1.modelo.Pregunta;
 import ar.edu.unlam.tallerweb1.modelo.Jugador;
 
@@ -193,7 +194,11 @@ public class ServicioJuegoImpl implements ServicioJuego {
 		juegoDao.actualizarEstadisticas( dinero, estres, social,  rendimiento, mie);
 		
 	}
-
+	
+	@Override
+	public ArrayList<TablaJugadorExamen> traerMejores(){
+		return juegoDao.traerMejores();
+	}
 
 	
 	

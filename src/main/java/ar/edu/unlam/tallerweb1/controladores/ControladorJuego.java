@@ -125,7 +125,6 @@ public class ControladorJuego {
 				
 				servicioLogin.guardarJugador(jugador);
 				mij = jugador;
-				
 				mie.setDinero(0);
 				mie.setEstres(0);
 				mie.setRendimiento(0);
@@ -162,7 +161,7 @@ public class ControladorJuego {
 	{
 	 	
 		ModelMap modelo = new ModelMap();
-		
+		modelo.put("jugador", mij);
 		modelo.put("respuesta", respuesta);
 		return new ModelAndView("inicio",modelo);
 	}
@@ -359,7 +358,8 @@ public class ControladorJuego {
 				modelo.put("social", miEstadistica.getSocial());
 				modelo.put("dinero", miEstadistica.getDinero());
 		
-				//ranking
+				ranking = servicioJuego.traerMejores();
+				modelo.put("ranking", ranking);
 		
 		
 	
