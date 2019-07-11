@@ -63,6 +63,8 @@ VALUES(1,1),
 (1,3),
 (1,4);
 
+insert into jugador(id,email,nombre,password,puntaje)
+VALUES(20,"cande@sama.com","Cande",123,50);
 
 SELECT * FROM RESPUESTA;
 SELECT * FROM PREGUNTA;
