@@ -1,7 +1,4 @@
 language: java
 jdk:
-  - oraclejdk12
+  - oraclejdk11
 install: mvn install
-notifications:
-  slack:
-    on_success: always
